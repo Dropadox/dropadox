@@ -1,14 +1,11 @@
 import { defineEventHandler, sendStream, createError } from "h3";
 import fs from "fs";
 import path from "path";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { uploads } from "../../database/schema";
 
 export default defineEventHandler(async (event) => {
   const { id } = event.context.params as { id: string };
-  const {token} = await readBody(event);
-
-  const userPayload = getUserPayload(token);
 
   const db = useDrizzle();
 
@@ -16,7 +13,7 @@ export default defineEventHandler(async (event) => {
   const record = await db
     .select()
     .from(uploads)
-    .where(and(eq(uploads.id, Number(id)), eq(uploads.userId, String(userPayload.id))))
+    .where(eq(uploads.id, Number(id)))
     .get();
 
   console.log(record);
