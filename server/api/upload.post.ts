@@ -2,26 +2,30 @@ import multer from "multer";
 import { defineEventHandler, readMultipartFormData } from "h3";
 import path from "path";
 import fs from "fs";
+import { Upload } from '../utils/useDrizzle';
+import { uploads } from "../database/schema";
+import jwt from 'jsonwebtoken';
+import { UserPayload } from "~~/shared/types/UserPayload";
 
 
-const upload = multer({ dest:"uploads/"})
+const upload = multer({ dest: "uploads/" })
 
-export default defineEventHandler( async (event) => {
-    const formdata = await readMultipartFormData(event); 
-    
-    if (!formdata){
-        return {error:"failded to grab form data"};
+export default defineEventHandler(async (event) => {
+    const formdata = await readMultipartFormData(event);
+
+    if (!formdata) {
+        return { error: "failded to grab form data" };
     }
     const file = formdata.find(item => item.name === "file");
 
-    if (!file){
-        return {error:"failed to get file"}
+    if (!file) {
+        return { error: "failed to get file" }
     }
     //if(!file.filename){
     //    return {error:"file has no filename"};
     //}
     const uuid = crypto.randomUUID();
-    const filename = file.filename?.split(".")[0] + `${uuid}.` + file.filename?.split(".")[1] || `upload-${uuid}`;
+    const filename = uuid + "." + file.filename; 
 
     const uploadPath = path.join(
         process.cwd(),
@@ -29,9 +33,32 @@ export default defineEventHandler( async (event) => {
         filename
     );
 
+    const token = formdata.find(item => item.name === "token")?.data.toString();
+
+    if (!token) {
+        throw createError({
+            statusText: "No token found",
+            status: 400
+        })
+    }
+
     fs.writeFileSync(uploadPath, file.data);
 
+    const userPayload = jwt.verify(token, process.env.JSON_SECRET_KEY!) as UserPayload;
+
+    const upload = await useDrizzle().insert(uploads)
+        .values({
+            userId: String(userPayload.id),
+            filePath: uploadPath,
+            privacyFlag: "private",
+            size: file.data.byteLength,
+
+        }).returning().get()
+
+
+
     return {
+        upload,
         name: file.filename,
         type: file.type,
         size: file.data.length

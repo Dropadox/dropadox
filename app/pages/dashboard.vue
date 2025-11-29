@@ -53,6 +53,8 @@
         <main class="p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           <FileCard v-for="n in 12" :key="n" />
         </main>
+
+        <FileUpload />
       </div>
     </div>
   </div>

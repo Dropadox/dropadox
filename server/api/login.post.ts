@@ -56,7 +56,8 @@ export default defineEventHandler(async (event) => {
  
     const token = jwt.sign({
         username: user.name,
-        emailAddress: user.email
+        emailAddress: user.email,
+        id: user.id
     }, process.env.JSON_SECRET_KEY!, { expiresIn: "48h" })
 
     return { token }

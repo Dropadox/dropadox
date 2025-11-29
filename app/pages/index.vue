@@ -15,8 +15,6 @@
       © 2025 Dropadox — Simple, secure file sharing
     </footer>
 
-    <FileUpload />
-
   </div>
 </template>
 <script setup lang="ts">

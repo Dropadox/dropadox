@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <h3>Upload File</h3>
         <input type="file" @change="onFileChange" />
@@ -27,8 +26,12 @@ function onFileChange(e){
 
 async function upload() {
   try {
+    const token = useCookie("token").value;
+
     const form = new FormData();
     form.append("file", file.value); // MUST be "file"
+    form.append("token", token)
+
     console.log("FILE BEING SENT:", file.value);
 
     const res = await fetch("/api/upload", {
