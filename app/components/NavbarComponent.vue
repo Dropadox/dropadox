@@ -20,6 +20,11 @@
                     Login
                 </Button>
             </NuxtLink>
+            <NuxtLink to="/settings" v-if="isLoggedIn">
+              <Button variant="outline" class="m-2 border-black text-black hover:bg-black/20">
+                Settings
+              </Button>
+            </NuxtLink>
             <Button @click="logoff" variant="outline" class="m-2 border-black text-black hover:bg-black/20"
                 v-if="isLoggedIn">
                 Log Out

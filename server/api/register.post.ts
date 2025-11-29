@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { users } from "../database/schema";
+import { userSettings } from "../database/schema";
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -13,6 +14,13 @@ export default defineEventHandler(async (event) => {
         password: hashedPassword,
         email: email
     }).returning().get();
+
+
+    const newUserSettings = await useDrizzle().insert(userSettings).values({
+        userID: String(newUser.id),
+        colorMode: "light"
+    }).returning().get();
+
 
     return { newUser };
 });

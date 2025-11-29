@@ -17,3 +17,9 @@ export const uploads = sqliteTable("uploads", {
     size: int("size").default(0),
     createdAt: text("created_at").notNull().default(sql`(current_timestamp)`),
 })
+
+export const userSettings = sqliteTable("userSettings", {
+    id: int("id").primaryKey({ autoIncrement: true }),
+    userID: text("user_id").references(() => users.id),
+    colorMode: text("color_mode").default('light'),
+})
