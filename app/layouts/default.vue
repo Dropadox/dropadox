@@ -1,3 +1,6 @@
 <template>
-    <slot/>
+    <div>
+        <NavbarComponent />
+        <slot />
+    </div>
 </template>

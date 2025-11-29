@@ -1,22 +1,6 @@
 <template>
   <div class="min-h-screen bg-zinc-300 dark:bg-slate-800 flex flex-col">
 
-    <header class="w-full py-4 px-6 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-black">Dropadox</h1>
-      <div>
-        <NuxtLink to="/signup">
-          <Button variant="outline" class="m-2 border-black text-black hover:bg-black/20">
-            Sign up
-          </Button>
-        </NuxtLink>
-        <NuxtLink to="/login">        
-          <Button variant="outline" class="m-2 border-black text-black hover:bg-black/20">
-            Login
-          </Button>
-        </NuxtLink>
-      </div>
-    </header>
-
     <main class="flex flex-col items-center justify-center flex-1 text-center px-4">
       <h2 class="text-4xl md:text-6xl font-extrabold text-black drop-shadow-md">
         Fast, Simple File Sharing
