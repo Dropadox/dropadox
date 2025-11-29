@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import FileUpload from '~/components/fileUpload.vue';
-
-</script>
-
 <template>
   <div class="min-h-screen bg-zinc-300 dark:bg-slate-800 flex flex-col">
 
