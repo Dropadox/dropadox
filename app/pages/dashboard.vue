@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="h-full" >
     <div class="flex h-full grow bg-zinc-100">
 
       <DashboardSidebar v-model:search="searchQuery">

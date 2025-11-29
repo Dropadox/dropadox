@@ -46,7 +46,7 @@
             </DropdownMenu>
         </header>
 
-        <main class="flex flex-col w-full gap-4 p-4">
+        <main class="flex flex-col w-full gap-4 p-4 overflow-y-scroll">
                 <slot />
         </main>
 
