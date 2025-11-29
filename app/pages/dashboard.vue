@@ -44,9 +44,7 @@
         </header>
 
         <main class="flex flex-col w-full gap-4 p-4">
-          <div v-for="userUpload in userUploads" class="bg-neutral-200 p-4 rounded-xl">
-            {{ (getFileName(userUpload.filePath ?? '')) }}
-          </div>
+          <FileCard v-for="fileUpload in userUploads" :file-id="fileUpload.id" :file-name="getFileName(fileUpload.filePath ?? '')" />
         </main>
       </div>
     </div>
