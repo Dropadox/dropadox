@@ -44,7 +44,7 @@
               <Button variant="outline">New ▼</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>Upload File</DropdownMenuItem>
+              <DropdownMenuItem @click="showUploadFile = true">Upload File</DropdownMenuItem>
               <DropdownMenuItem>New Folder</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -53,10 +53,18 @@
         <main class="p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           <FileCard v-for="n in 12" :key="n" />
         </main>
-
-        <FileUpload />
       </div>
     </div>
+
+    <Dialog v-model:open="showUploadFile">
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>Upload a File</DialogTitle>
+            </DialogHeader>
+            
+            <fileUpload/>
+        </DialogContent>
+    </Dialog>
   </div>
 </template>
 
@@ -65,7 +73,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-
-// Icons (lucide-vue)
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, } from "@/components/ui/dialog"
+//icons
 import { Upload, Folder, Star, Trash2, File } from "lucide-vue-next";
+
+const showUploadFile = ref(false)
 </script>

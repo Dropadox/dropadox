@@ -1,13 +1,37 @@
 <template>
-    <div>
-        <h3>Upload File</h3>
-        <input type="file" @change="onFileChange" />
-         <button @click="upload" :disabled="!file" style="margin-top: 10px">Upload</button>
+  <div>
+      <!-- File Input -->
+      <label
+        class="flex flex-col items-center justify-center w-full h-32 border border-dashed border-zinc-300 rounded-lg cursor-pointer hover:bg-zinc-100 transition"
+      >
+        <p class="text-zinc-600">
+          {{ file ? file.name : "Click to choose a file…" }}
+        </p>
+        <input type="file" class="hidden" @change="onFileChange" />
+      </label>
 
-        <pre v-if="response">{{ response }}</pre>
-        <p v-if="error" style="color: red">{{ error }}</p>
-    </div>
+      <!-- Upload Button -->
+      <Button
+        class="w-full mt-2 bg-zinc-300 hover:bg-zinc-400 text-zinc-800 font-medium"
+        :disabled="!file"
+        @click="upload"
+      >
+        Upload
+      </Button>
+
+      <!-- Response -->
+      <pre
+        v-if="response"
+        class="bg-zinc-100 p-3 rounded text-sm text-zinc-700 whitespace-pre-wrap"
+      >
+{{ response }}
+      </pre>
+
+      <!-- Error -->
+      <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
+  </div>
 </template>
+
 
 <script setup>
 import { ref } from "vue";
@@ -44,8 +68,4 @@ async function upload() {
     error.value = "Upload failed";
   }
 }
-
-
-
-
 </script>
