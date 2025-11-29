@@ -55,7 +55,7 @@
             }
           })
           router.push('/login')
-        } catch (error) {
+        } catch (err) {
            submissionError.value = "Unable to register user, please try again"
         }
 
