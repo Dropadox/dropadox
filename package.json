@@ -27,12 +27,9 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
-<<<<<<< Updated upstream
     "@types/multer": "^2.0.0",
-=======
     "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^24.10.1",
->>>>>>> Stashed changes
     "drizzle-kit": "^0.31.7",
     "shadcn": "^3.5.1",
     "shadcn-nuxt": "^2.3.3",
