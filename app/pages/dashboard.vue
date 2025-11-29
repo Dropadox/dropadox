@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="flex h-screen bg-zinc-100">
+  <div class="h-full">
+    <div class="flex h-full grow bg-zinc-100">
 
       <aside class="w-64 bg-zinc-300 text-black flex flex-col p-4 space-y-6">
         <h1 class="text-2xl font-bold">Dropadox</h1>

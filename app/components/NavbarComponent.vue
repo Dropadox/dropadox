@@ -1,6 +1,6 @@
 <template>
 
-    <header class="w-full py-4 px-6 flex justify-between items-center">
+    <header class="w-full py-4 px-6 flex justify-between items-center max-h-[5dvh]">
         <h1 class="text-2xl font-bold text-black">Dropadox</h1>
         <div>
             <NuxtLink to="/signup" v-if="!isLoggedIn">

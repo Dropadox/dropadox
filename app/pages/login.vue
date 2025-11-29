@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-zinc-300 dark:bg-slate-800 flex flex-col">
+  <div class="h-full bg-zinc-300 dark:bg-slate-800 flex flex-col">
 
     <main class="flex flex-col items-center justify-center flex-1 px-6 text-center">
 
