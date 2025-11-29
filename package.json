@@ -12,6 +12,7 @@
   "dependencies": {
     "@libsql/client": "^0.15.15",
     "@types/jsonwebtoken": "^9.0.10",
+    "@vueuse/core": "^14.1.0",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -27,8 +28,8 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
-    "@types/multer": "^2.0.0",
     "@tailwindcss/vite": "^4.1.17",
+    "@types/multer": "^2.0.0",
     "@types/node": "^24.10.1",
     "drizzle-kit": "^0.31.7",
     "shadcn": "^3.5.1",

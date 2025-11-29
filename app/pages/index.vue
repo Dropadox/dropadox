@@ -37,8 +37,9 @@ import FileUpload from '~/components/fileUpload.vue';
     </footer>
 
   </div>
-</template>
 
+  <FileUpload />
+</template>
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 </script>
