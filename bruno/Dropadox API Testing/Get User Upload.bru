@@ -1,0 +1,21 @@
+meta {
+  name: Get User Upload
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/api/files/get/5
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1bGlhbnNlaXR6IiwiZW1haWxBZGRyZXNzIjoianVsaWFuLnNlaXR6QHN0dWRlbnQuc2wub24uY2EiLCJpZCI6MywiaWF0IjoxNzY0NDQ0NzcxLCJleHAiOjE3NjQ2MTc1NzF9.sAHTsKMUHV6XPhVcX6G2lDO06tbCNZdYfysgUSMuXUg"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
