@@ -4,11 +4,6 @@
 
       <aside class="w-64 bg-zinc-300 text-black flex flex-col p-4 space-y-6">
         <nav class="flex flex-col space-y-2">
-          <Button variant="secondary" class="justify-start bg-zinc-400/40 hover:bg-zinc-400/60">
-            <Upload class="w-4 h-4 mr-2" />
-            Upload Files
-          </Button>
-
           <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
             <Folder class="w-4 h-4 mr-2" />
             My Files
@@ -55,13 +50,13 @@
     </div>
 
     <Dialog v-model:open="showUploadFile">
-        <DialogContent>
-            <DialogHeader>
-                <DialogTitle>Upload a File</DialogTitle>
-            </DialogHeader>
-            
-            <fileUpload/>
-        </DialogContent>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Upload a File</DialogTitle>
+        </DialogHeader>
+
+        <fileUpload />
+      </DialogContent>
     </Dialog>
   </div>
 </template>
