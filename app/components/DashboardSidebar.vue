@@ -28,8 +28,11 @@
 
         <header class="p-4 border-b flex items-center gap-4">
             <div class="flex-1">
-                <Input placeholder="Search files…"
-                    class="text-zinc-300 border-zinc-300 bg-white focus-visible:ring-zinc-300" />
+              <Input
+                  v-model="search"
+                  placeholder="Search files…"
+                  class="text-zinc-300 border-zinc-300 bg-white focus-visible:ring-zinc-300"
+              />
             </div>
 
             <DropdownMenu>
@@ -60,13 +63,22 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, defineProps, defineEmits, watch } from 'vue';
 import { Upload, Folder, Star, Trash2, File } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, } from "@/components/ui/dialog"
-//icons
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 const showUploadFile = ref(false)
 
+const props = defineProps<{ modelValue?: string }>();
+const emit = defineEmits<{
+  (e: 'update:search', value: string): void
+}>();
+
+const search = ref(props.modelValue ?? "");
+
+// Keep v-model in sync
+watch(search, (val: string) => emit("update:search", val));
 </script>
