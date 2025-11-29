@@ -25,7 +25,7 @@
         </div>
       </aside>
 
-      <div class="flex-1 flex flex-col">
+      <div class="flex-1 flex flex-col w-full">
 
         <header class="p-4 border-b flex items-center gap-4 bg-black">
           <div class="flex-1">
@@ -43,8 +43,10 @@
           </DropdownMenu>
         </header>
 
-        <main class="p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          <FileCard v-for="n in 12" :key="n" />
+        <main class="flex flex-col w-full gap-4 p-4">
+          <div v-for="userUpload in userUploads" class="bg-neutral-200 p-4 rounded-xl">
+            {{ (getFileName(userUpload.filePath ?? '')) }}
+          </div>
         </main>
       </div>
     </div>
@@ -71,4 +73,31 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, } from 
 import { Upload, Folder, Star, Trash2, File } from "lucide-vue-next";
 
 const showUploadFile = ref(false)
+
+const token = useCookie("token").value;
+
+if (!token) {
+  await navigateTo("/");
+}
+
+const { data } = await useFetch("/api/files/fromUser", {
+  method: "POST",
+  body: {
+    token: token
+  }
+});
+
+const userUploads = data.value?.userUploads;
+
+function getFileName(fileName: string) {
+  // get the filename only
+  const filename = fileName.split("//").pop()!;
+
+  // remove everything up to the first dot
+  const cleanFilename = fileName.substring(filename.indexOf(".") + 1);
+
+  return cleanFilename;
+}
+
+
 </script>
