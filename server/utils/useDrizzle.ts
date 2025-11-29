@@ -18,3 +18,4 @@ export function useDrizzle() {
 }
 
 export type User = typeof schema.users.$inferSelect;
+export type Upload = typeof schema.uploads.$inferSelect;
