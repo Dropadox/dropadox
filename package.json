@@ -12,8 +12,11 @@
   "dependencies": {
     "@libsql/client": "^0.15.15",
     "@tailwindcss/vite": "^4.1.17",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.7",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^4.2.1",
     "tailwindcss": "^4.1.17",
     "vue": "^3.5.25",
