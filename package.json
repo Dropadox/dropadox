@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "drizzle-kit": "^0.31.7",
+    "shadcn-nuxt": "^2.3.3",
     "tsx": "^4.20.6"
   }
 }
