@@ -19,33 +19,27 @@
         Upload
       </Button>
 
-      <!-- Response -->
-      <pre
-        v-if="response"
-        class="bg-zinc-100 p-3 rounded text-sm text-zinc-700 whitespace-pre-wrap"
-      >
-{{ response }}
-      </pre>
-
       <!-- Error -->
-      <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
+      <p v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</p>
+
+      <!-- Success / Verification -->
+      <p v-if="response" class="text-green-600 text-sm mt-2">
+        File "{{ response.fileName || file?.name }}" uploaded successfully!
+      </p>
   </div>
 </template>
 
-
 <script setup>
 import { ref } from "vue";
-
 
 const file = ref(null);
 const response = ref(null);
 const error = ref(null);
 
-function onFileChange(e){
-    console.log("CLIENT FILE:", file.value);
-    file.value = e.target.files[0];
-    response.value = null;
-    error.value = null;
+function onFileChange(e) {
+  file.value = e.target.files[0];
+  response.value = null;
+  error.value = null;
 }
 
 async function upload() {
@@ -53,19 +47,20 @@ async function upload() {
     const token = useCookie("token").value;
 
     const form = new FormData();
-    form.append("file", file.value); // MUST be "file"
-    form.append("token", token)
-
-    console.log("FILE BEING SENT:", file.value);
+    form.append("file", file.value);
+    form.append("token", token);
 
     const res = await fetch("/api/upload", {
       method: "POST",
-      body: form
+      body: form,
     });
 
+    // Assume backend returns { fileName: 'example.txt' }
     response.value = await res.json();
+    error.value = null;
   } catch (err) {
     error.value = "Upload failed";
+    response.value = null;
   }
 }
 </script>
