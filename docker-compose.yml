@@ -1,15 +1,20 @@
 services: 
-  node1:
+  dropadox:
       image: node:22-alpine
-      container_name: node1
+      container_name: dropadox
       restart: always
-      networks: [webnet]
       ports:
         - "3000:3000"
       volumes:
-        - ./sites/site1/dropadox:/usr/src/app
+        - ./:/usr/src/app
       working_dir: /usr/src/app
       env_file:
-        - ./sites/site1/dropadox/.env
-      command: sh -c "npm install && npm run build && node .output/server/index.mjs"
+        - ./.env
+      #for prod build 
+      #command: sh -c "npm install && npm run build && node .output/server/index.mjs"
+      
 
+      #for dev 
+      command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
+
+      #run 'docker compose logs -f dropadox'- 
