@@ -38,7 +38,7 @@
             <input
                 v-model="state.password"
                 type="password"
-                :placeholder="t('signIn.password')"
+                :placeholder="t('signUp.password')"
                 class="w-full p-3 rounded-md border border-black/30 bg-white focus:outline-none focus:ring-2 focus:ring-black"
             />
             <p v-if="passwordError" class="text-red-500 text-sm mt-1">{{ passwordError }}</p>
