@@ -3,20 +3,21 @@
 
     <main class="flex flex-col items-center justify-center flex-1 text-center px-4">
       <h2 class="text-4xl md:text-6xl font-extrabold text-black drop-shadow-md">
-        Fast, Simple File Sharing
+        {{ t("index.h2") }}
       </h2>
 
       <p class="text-black /90 mt-4 text-lg max-w-xl">
-        Drop your files, get a link. No accounts. No hassle.
+        {{ t("index.tagLine") }}
       </p>
     </main>
 
-    <footer class="text-center py-6 text-black/80 text-sm">
-      © 2025 Dropadox — Simple, secure file sharing
-    </footer>
+    <Footer />
 
   </div>
 </template>
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
+import Footer from "~/components/Footer.vue";
+
+const {t} = useI18n();
 </script>

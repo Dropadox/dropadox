@@ -4,23 +4,23 @@
             <NuxtLink to="/dashboard">
                 <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
                     <Folder class="w-4 h-4 mr-2" />
-                    My Files
+                    {{ t('dashboard.myFiles') }}
                 </Button>
             </NuxtLink>
 
             <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
                 <Star class="w-4 h-4 mr-2" />
-                Starred
+                {{ t('dashboard.starred') }}
             </Button>
 
             <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
                 <Trash2 class="w-4 h-4 mr-2" />
-                Trash
+                {{ t('dashboard.trash') }}
             </Button>
         </nav>
 
         <div class="mt-auto text-sm text-black/80">
-            © 2025 Dropadox
+            © {{ new Date().getFullYear() }} {{ t('common.siteName') }}
         </div>
     </aside>
 
@@ -28,32 +28,29 @@
 
         <header class="p-4 border-b flex items-center gap-4">
             <div class="flex-1">
-              <Input
-                  v-model="search"
-                  placeholder="Search files…"
-                  class="text-zinc-300 border-zinc-300 bg-white focus-visible:ring-zinc-300"
-              />
+                <Input v-model="search" :placeholder="t('dashboard.searchFiles')"
+                    class="text-zinc-300 border-zinc-300 bg-white focus-visible:ring-zinc-300" />
             </div>
 
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button variant="outline">New ▼</Button>
+                    <Button variant="outline">{{ t('common.words.new') }} ▼</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem @click="showUploadFile = true">Upload File</DropdownMenuItem>
-                    <DropdownMenuItem>New Folder</DropdownMenuItem>
+                    <DropdownMenuItem @click="showUploadFile = true">{{ t('dashboard.uploadFile') }}</DropdownMenuItem>
+                    <DropdownMenuItem>{{ t('dashboard.newFolder') }}</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </header>
 
         <main class="flex flex-col w-full gap-4 p-4 overflow-y-scroll">
-                <slot />
+            <slot />
         </main>
 
         <Dialog v-model:open="showUploadFile">
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Upload a File</DialogTitle>
+                    <DialogTitle>{{ t('dashboard.uploadFileModalTitle') }}</DialogTitle>
                 </DialogHeader>
 
                 <fileUpload />
@@ -69,12 +66,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+const { t } = useI18n();
 
 const showUploadFile = ref(false)
 
 const props = defineProps<{ modelValue?: string }>();
 const emit = defineEmits<{
-  (e: 'update:search', value: string): void
+    (e: 'update:search', value: string): void
 }>();
 
 const search = ref(props.modelValue ?? "");

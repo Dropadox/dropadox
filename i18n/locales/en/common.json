@@ -1,0 +1,18 @@
+{
+  "common": {
+    "siteName": "Dropadox",
+    "words": {
+      "new": "New"
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "login": "Login",
+        "signup": "Sign Up",
+        "settings": "Settings",
+        "logOut": "Log Out"
+    },
+    "footer": {
+      "copyrightText": "Dropadox. All rights reserved."
+    }
+  }
+}
