@@ -28,7 +28,7 @@
           <div class="text-left">
             <input
                 v-model="state.email"
-                :placeholder="t('signIn.email')"
+                :placeholder="t('signUp.email')"
                 class="w-full p-3 rounded-md border border-black/30 bg-white focus:outline-none focus:ring-2 focus:ring-black"
             />
             <p v-if="emailError" class="text-red-500 text-sm mt-1">{{ emailError }}</p>
