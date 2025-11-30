@@ -27,7 +27,6 @@
 
 <script setup>
 import { ref } from "vue";
-import { routerKey } from "vue-router";
 const {t} = useI18n();
 
 const file = ref(null);
