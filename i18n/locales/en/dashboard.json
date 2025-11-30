@@ -1,0 +1,14 @@
+{
+    "dashboard": {
+        "myFiles": "My Files",
+        "starred": "Starred",
+        "trash": "Trash",
+        "searchFiles": "Search files...",
+        "uploadFile": "Upload File",
+        "newFolder": "New Folder",
+        "uploadFileModalTitle": "Upload a file",
+        "uploadFileModalDescription": "Select a file from your computer",
+        "uploadFileModalButton": "Upload",
+        "uploadFileSuccessMessage": "File: '{fileName}' uploaded successfully!"
+    }
+}

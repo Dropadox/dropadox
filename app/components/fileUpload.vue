@@ -4,7 +4,7 @@
     <label
       class="flex flex-col items-center justify-center w-full h-32 border border-dashed border-zinc-300 rounded-lg cursor-pointer hover:bg-zinc-100 transition">
       <p class="text-zinc-600">
-        {{ file ? file.name : "Click to choose a file…" }}
+        {{ file ? file.name : t('dashboard.uploadFileModalDescription') }}
       </p>
       <input type="file" class="hidden" @change="onFileChange" />
     </label>
@@ -12,7 +12,7 @@
     <!-- Upload Button -->
     <Button class="w-full mt-2 bg-zinc-300 hover:bg-zinc-400 text-zinc-800 font-medium" :disabled="!file"
       @click="upload">
-      Upload
+      {{ t('dashboard.uploadFileModalButton') }}
     </Button>
 
     <!-- Error -->
@@ -20,14 +20,14 @@
 
     <!-- Success / Verification -->
     <p v-if="response" class="text-green-600 text-sm mt-2">
-      File "{{ response.fileName || file?.name }}" uploaded successfully!
+      {{ t('dashboard.uploadFileSuccessMessage', { fileName: response.fileName || file?.name }) }}
     </p>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { routerKey } from "vue-router";
+const {t} = useI18n();
 
 const file = ref(null);
 const response = ref(null);

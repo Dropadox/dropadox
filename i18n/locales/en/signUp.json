@@ -1,0 +1,13 @@
+{
+    "signUp": {
+        "text": "Oh, hey!",
+        "name": "Name",
+        "buttonText": "Create Account",
+        "validation": {
+            "nameRequired": "Please enter your name."
+        },
+        "error": {
+            "submissionFailed": "Sign up failed. Please try again."
+        }
+    }
+}

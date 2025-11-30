@@ -1,0 +1,12 @@
+{
+    "signIn": {
+        "text": "Welcome back!",
+        "email": "Email",
+        "password": "Password",
+        "buttonText": "Sign In",
+        "validation": {
+            "validEmail": "Please enter a valid email address.",
+            "passwordRequired": "Please enter a password."
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "settings": {
+        "title": "User Settings",
+        "colorProfile": {
+            "label": "Color Profile",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System Default"
+        },
+        "updateButton": "Update Settings",
+        "errorUpdating": "An error occurred while updating settings. Please try again."
+    }
+}

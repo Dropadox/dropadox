@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1764432963474,
-      "tag": "0000_overrated_grandmaster",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1764436298879,
-      "tag": "0001_short_glorian",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1764436365916,
-      "tag": "0002_wet_trish_tilby",
+      "when": 1764474266210,
+      "tag": "0000_volatile_bloodaxe",
       "breakpoints": true
     }
   ]
