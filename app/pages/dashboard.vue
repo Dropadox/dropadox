@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <div class="flex h-full grow bg-zinc-100">
+    <div class="flex h-full grow bg-zinc-100 dark:bg-neutral-800/95">
 
       <DashboardSidebar v-model:search="searchQuery">
         <FileCard v-for="fileUpload in filteredUploads" :key="fileUpload.id" :file-id="fileUpload.id"

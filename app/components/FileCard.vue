@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-neutral-200 p-4 rounded-xl hover:bg-neutral-300 transition-colors duration-200 cursor-pointer"
+    <div class="bg-neutral-200 dark:bg-neutral-900/60 hover:dark:bg-blue-500/30 p-4 rounded-xl hover:bg-neutral-300 transition-colors duration-200 cursor-pointer"
         :key="fileId">
-        <div class="flex justify-between">
-            <div class="flex gap-4 items-center font-bold">
+        <div class="flex justify-between dark:text-white/60">
+            <div class="flex gap-4 items-center font-bold dark:text-white/80">
                 <File></File>
                 {{ props.fileName }}
             </div>
