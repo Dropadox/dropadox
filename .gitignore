@@ -26,3 +26,5 @@ public/uploads
 .env.*
 !.env.example
 package-lock.json
+
+local.db
