@@ -5,6 +5,7 @@
                 <div class="p-4 bg-white rounded-lg shadow-md flex flex-col gap-2">
                     <h1 class="text-2xl font-bold mb-4">File Details</h1>
                     <p>File ID: {{ upload.id }}</p>
+                    <p>File Size: {{ upload.size }} bytes</p>
                     <p>File Name: {{ upload.filePath }}</p>
                     <p>Uploaded At: {{ new Date(upload.createdAt).toLocaleString() }}</p>
                     <Button @click="download" class="bg-blue-500 hover:bg-blue-400 cursor-pointer">
