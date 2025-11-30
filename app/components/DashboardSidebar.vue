@@ -1,12 +1,14 @@
 <template>
     <aside class="w-64 bg-zinc-300 dark:bg-neutral-900 dark:text-white flex flex-col p-4 space-y-6">
         <nav class="flex flex-col space-y-2">
-            <NuxtLink to="/dashboard">
-                <Button variant="ghost" class="justify-start hover:bg-zinc-400/30">
-                    <Folder class="w-4 h-4 mr-2" />
-                    {{ t('dashboard.myFiles') }}
-                </Button>
-            </NuxtLink>
+            <Button variant="ghost" 
+            class="justify-start hover:bg-zinc-400/30 cursor-pointer" 
+            @click="navigateTo('/dashboard')"
+            :class="{ 'bg-zinc-400/30': route.path === '/dashboard' }">
+        
+                <Folder class="w-4 h-4 mr-2" />
+                {{ t('dashboard.myFiles') }}
+            </Button>
 
             <Button variant="ghost" class="justify-start hover:bg-zinc-400/30">
                 <Star class="w-4 h-4 mr-2" />
@@ -34,7 +36,9 @@
 
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button variant="default">{{ t('common.words.new') }} ▼</Button>
+                    <Button class="cursor-pointer" variant="default">{{ t('common.words.new') }}
+                        <ChevronDown />
+                    </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem @click="showUploadFile = true">{{ t('dashboard.uploadFile') }}</DropdownMenuItem>
@@ -43,7 +47,7 @@
             </DropdownMenu>
         </header>
 
-        <main class="flex flex-col w-full gap-4 p-4 overflow-y-scroll">
+        <main class="flex flex-col w-full gap-4 p-4 overflow-y-auto">
             <slot />
         </main>
 
@@ -61,12 +65,14 @@
 
 <script lang="ts" setup>
 import { ref, defineProps, defineEmits, watch } from 'vue';
-import { Upload, Folder, Star, Trash2, File } from "lucide-vue-next";
+import { Upload, Folder, Star, Trash2, File, ChevronDown } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import path from 'path';
 const { t } = useI18n();
+const route = useRoute();
 
 const showUploadFile = ref(false)
 

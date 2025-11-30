@@ -1,5 +1,6 @@
 {
     "dashboard": {
+        "title": "Dashboard",
         "myFiles": "My Files",
         "starred": "Starred",
         "trash": "Trash",

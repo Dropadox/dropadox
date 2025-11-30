@@ -13,6 +13,9 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import DashboardSidebar from "@/components/DashboardSidebar.vue"; // make sure to import it
+import { getFileName } from '../../shared/utils/getFileName';
+
+const {t} = useI18n();
 
 // --- Auth check ---
 const token = useCookie("token").value;
@@ -30,15 +33,14 @@ const userUploads = ref(data.value?.userUploads ?? []);
 
 const searchQuery = ref("");
 
-function getFileName(fileName: string) {
-  const filename = fileName.split("//").pop()!;
-  return fileName.substring(filename.indexOf(".") + 1);
-}
-
 const filteredUploads = computed(() => {
   if (!searchQuery.value) return userUploads.value;
   return userUploads.value.filter(file =>
     getFileName(file.filePath ?? '').toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
+
+useHead({
+  title: t("common.siteName") + " - " + t("dashboard.title")
+})
 </script>

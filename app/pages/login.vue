@@ -25,7 +25,7 @@
             <p v-if="passwordError" class="text-red-500 text-sm mt-1">{{ passwordError }}</p>
           </div>
 
-          <Button @click="signIn" class="w-full text-white hover:bg-black/80 mt-2 py-3 rounded-xl">
+          <Button @click="signIn" class="w-full text-white hover:bg-black/80 mt-2 py-3 rounded-xl cursor-pointer">
             {{ t("signIn.buttonText") }}
           </Button>
         </div>
@@ -87,5 +87,9 @@ async function signIn() {
 
   }
 }
+
+useHead({
+  title: t("common.siteName") + " - " + t("common.nav.login")
+})
 
 </script>

@@ -2,7 +2,9 @@
   "common": {
     "siteName": "Dropadox",
     "words": {
-      "new": "New"
+      "new": "New",
+      "download": "Download",
+      "welcome": "Welcome"
     },
     "nav": {
         "dashboard": "Dashboard",

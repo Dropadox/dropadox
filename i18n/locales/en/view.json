@@ -1,0 +1,11 @@
+{
+    "view": {
+        "fileDetails": {
+            "title": "File Details",
+            "fileId": "File ID",
+            "fileName": "File Name",
+            "fileSize": "File Size",
+            "uploadedAt": "Uploaded At"    
+        }
+    }
+}

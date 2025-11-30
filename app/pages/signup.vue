@@ -29,7 +29,7 @@
             <Input
               v-model="state.email"
               type="email"
-              :placeholder="t('signUp.email')"
+              :placeholder="t('signIn.email')"
             />
             <p v-if="emailError" class="text-red-500 text-sm mt-1">{{ emailError }}</p>
           </div>
@@ -39,14 +39,14 @@
             <Input
               v-model="state.password"
               type="password"
-              :placeholder="t('signUp.password')"
+              :placeholder="t('signIn.password')"
             />
             <p v-if="passwordError" class="text-red-500 text-sm mt-1">{{ passwordError }}</p>
           </div>
 
           <Button
             @click="signUp"
-            class="w-full bg-black text-white hover:bg-black/80 mt-2 py-3 rounded-xl"
+            class="w-full bg-black text-white hover:bg-black/80 mt-2 py-3 rounded-xl cursor-pointer"
           >
             {{ t("signUp.buttonText") }}
           </Button>
@@ -116,4 +116,8 @@ async function signUp() {
     submissionError.value = t("signUp.error.submissionFailed");
   }
 }
+
+useHead({
+  title: t("common.siteName") + " - " + t("common.nav.signup")
+})
 </script>

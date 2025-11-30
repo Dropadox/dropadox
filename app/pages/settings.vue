@@ -69,4 +69,8 @@ async function updateSettings() {
     updateError.value = t('settings.errorUpdating')
   }
 }
+
+useHead({
+  title: t("common.siteName") + " - " + t("settings.title")
+})
 </script>
