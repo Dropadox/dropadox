@@ -59,12 +59,12 @@ We welcome open source contributions.
 
 Please make sure:
 
-- **Naming conventions:** Use **camelCase** for all JavaScript/TypeScript variables, functions.
-      - Use **PascalCase** for classes, interfaces, and other types.
-- Follow **Nuxt framework conventions** for routing, composables, plugins, and server APIs…
-- All database access must go through **Drizzle ORM** (no raw queries unless explicitly required).
-- Styling must follow **ShadCN + Tailwind conventions**:
-- Keep components small, reusable, and single-purpose.
+* **Naming conventions:** Use **camelCase** for all JavaScript/TypeScript variables, functions.
+   * Use **PascalCase** for classes, interfaces, and other types.
+* Follow **Nuxt framework conventions** for routing, composables, plugins, and server APIs…
+* All database access must go through **Drizzle ORM** (no raw queries unless explicitly required).
+* Styling must follow **ShadCN + Tailwind conventions**:
+* Keep components small, reusable, and single-purpose.
 
 ---
 
