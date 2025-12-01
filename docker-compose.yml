@@ -15,6 +15,7 @@ services:
       
 
       #for dev 
-      command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
-
+      #command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
+      
+      command: sh -c "npm install && npm run dev"
       #run 'docker compose logs -f dropadox'- 
