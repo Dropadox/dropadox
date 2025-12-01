@@ -98,4 +98,4 @@ npm run dev
 
 ## License
 
-DropaDox is an open source project under a **GNU/MIT-style license**.  
+DropaDox is an open source project under the **GNU GPL v2.0 license**.  
