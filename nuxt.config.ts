@@ -12,7 +12,13 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en', name: 'English', files: [
-          'en/common.json', 'en/index.json', 'en/signIn.json', 'en/signUp.json', 'en/dashboard.json', 'en/settings.json'
+          'en/common.json', 
+          'en/index.json', 
+          'en/signIn.json', 
+          'en/signUp.json', 
+          'en/dashboard.json', 
+          'en/settings.json',
+          'en/view.json'
         ]
       }
     ],

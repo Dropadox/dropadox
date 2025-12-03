@@ -1,21 +1,21 @@
 <template>
-    <div class="bg-neutral-200 p-4 rounded-xl hover:bg-neutral-300 transition-colors duration-200 cursor-pointer"
+    <div class="bg-neutral-200 dark:bg-neutral-900/60 hover:dark:bg-blue-500/30 p-4 rounded-xl hover:bg-neutral-300 transition-colors duration-200 cursor-pointer"
         :key="fileId">
-        <div class="flex justify-between">
-            <div class="flex gap-4 items-center font-bold">
-                <File></File>
+        <div class="flex justify-between dark:text-white/60" @click="navigateTo(`/view/${props.fileId}`)">
+            <div class="flex gap-4 items-center font-bold dark:text-white/80">
+                <File />
                 {{ props.fileName }}
             </div>
 
             <div class="flex gap-4">
 
-                <NuxtLink :to="`/view/${props.fileId}`" class="cursor-pointer">
+                <NuxtLink :to="`/view/${props.fileId}`" class="cursor-pointer hover:text-blue-400">
                     <div class="ml-auto text-sm">
                         <Eye />
                     </div>
                 </NuxtLink>
 
-                <button @click="download" class="cursor-pointer">
+                <button @click="(e) => {e.stopPropagation(); download(); }" class="cursor-pointer hover:text-blue-400">
                     <Download />
                 </button>
             </div>

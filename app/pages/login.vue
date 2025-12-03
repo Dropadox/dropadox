@@ -1,13 +1,13 @@
 <template>
-  <div class="h-full bg-zinc-300 dark:bg-slate-800 flex flex-col">
+  <div class="h-full bg-zinc-300 dark:bg-neutral-800 flex flex-col">
 
-    <main class="flex flex-col items-center justify-center flex-1 px-6 text-center">
+    <main class="flex flex-col items-center justify-center flex-1 px-6 text-center dark:text-white/80">
 
-      <h2 class="text-4xl font-extrabold text-black drop-shadow-md mb-6">
+      <h2 class="text-4xl font-extrabold drop-shadow-md mb-6">
         {{ t("signIn.text") }}
       </h2>
 
-      <div class="w-full max-w-sm bg-white/60 dark:bg-slate-700/50 p-6 rounded-xl shadow-md backdrop-blur">
+      <div class="w-full max-w-sm bg-white/60 dark:bg-neutral-700/50 p-6 rounded-xl shadow-md backdrop-blur">
 
         <p v-if="submissionError" class="text-red-500 font-medium mb-2">
           {{ submissionError }}
@@ -16,18 +16,16 @@
         <div class="flex flex-col space-y-4">
 
           <div class="text-left">
-            <input v-model="state.email" :placeholder="t('signIn.email')"
-              class="w-full p-3 rounded-md border border-black/30 bg-white focus:outline-none focus:ring-2 focus:ring-black" />
+            <Input v-model="state.email" :placeholder="t('signIn.email')" />
             <p v-if="emailError" class="text-red-500 text-sm mt-1">{{ emailError }}</p>
           </div>
 
           <div class="text-left">
-            <input v-model="state.password" type="password" :placeholder="t('signIn.password')"
-              class="w-full p-3 rounded-md border border-black/30 bg-white focus:outline-none focus:ring-2 focus:ring-black" />
+            <Input v-model="state.password" type="password" :placeholder="t('signIn.password')" />
             <p v-if="passwordError" class="text-red-500 text-sm mt-1">{{ passwordError }}</p>
           </div>
 
-          <Button @click="signIn" class="w-full bg-black text-white hover:bg-black/80 mt-2 py-3 rounded-xl">
+          <Button @click="signIn" class="w-full text-white hover:bg-black/80 mt-2 py-3 rounded-xl cursor-pointer">
             {{ t("signIn.buttonText") }}
           </Button>
         </div>
@@ -89,5 +87,9 @@ async function signIn() {
 
   }
 }
+
+useHead({
+  title: t("common.siteName") + " - " + t("common.nav.login")
+})
 
 </script>

@@ -53,8 +53,20 @@ async function upload() {
       body: form,
     });
 
-    // Assume backend returns { fileName: 'example.txt' }
-    response.value = await res.json();
+
+    const data = await res.json();
+    
+    
+    if (!res.ok) {
+      if (res.status === 413 && res.statusText === "MAXIMUM_STORAGE_REACHED") {
+        error.value = "You have reached your maximum storage capacity";
+      } else {
+        error.value = data?.statusMessage || "Upload failed";
+      }
+      response.value = null;
+      return;
+    }
+    response.value = data;
     error.value = null;
     await router.push("/dashboard")
   } catch (err) {

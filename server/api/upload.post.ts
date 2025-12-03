@@ -5,9 +5,10 @@ import fs from "fs";
 import { Upload } from '../utils/useDrizzle';
 import { uploads } from "../database/schema";
 import jwt from 'jsonwebtoken';
-import { UserPayload } from "~~/shared/types/UserPayload";
+import { UserPayload } from "~/shared/types/UserPayload";
+import { getUserStorageBytes } from "../database/userStorage";
 
-
+const MAX_BYTES = Number(process.env.MAX_USER_STORAGE_BYTES);
 const upload = multer({ dest: "uploads/" })
 
 export default defineEventHandler(async (event) => {
@@ -16,6 +17,7 @@ export default defineEventHandler(async (event) => {
     if (!formdata) {
         return { error: "failded to grab form data" };
     }
+    
     const file = formdata.find(item => item.name === "file");
 
     if (!file) {
@@ -41,10 +43,23 @@ export default defineEventHandler(async (event) => {
             status: 400
         })
     }
+    
+    const userPayload = jwt.verify(token, process.env.JSON_SECRET_KEY!) as UserPayload;
 
+    //limits users file storage capacity
+    if (await getUserStorageBytes(String(userPayload.id)) >= MAX_BYTES){
+        console.log("storage capacity reached");
+        throw createError({
+          statusCode: 413,
+          statusMessage: "MAXIMUM_STORAGE_REACHED",   // ← your custom flag/message
+          data: {
+              maxBytes: MAX_BYTES
+          }
+        });
+    }
     fs.writeFileSync(uploadPath, file.data);
 
-    const userPayload = jwt.verify(token, process.env.JSON_SECRET_KEY!) as UserPayload;
+
 
     const upload = await useDrizzle().insert(uploads)
         .values({

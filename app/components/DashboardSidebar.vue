@@ -1,40 +1,44 @@
 <template>
-    <aside class="w-64 bg-zinc-300 text-black flex flex-col p-4 space-y-6">
+    <aside class="w-64 bg-zinc-300 dark:bg-neutral-900 dark:text-white flex flex-col p-4 space-y-6">
         <nav class="flex flex-col space-y-2">
-            <NuxtLink to="/dashboard">
-                <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
-                    <Folder class="w-4 h-4 mr-2" />
-                    {{ t('dashboard.myFiles') }}
-                </Button>
-            </NuxtLink>
+            <Button variant="ghost" 
+            class="justify-start hover:bg-zinc-400/30 cursor-pointer" 
+            @click="navigateTo('/dashboard')"
+            :class="{ 'bg-zinc-400/30': route.path === '/dashboard' }">
+        
+                <Folder class="w-4 h-4 mr-2" />
+                {{ t('dashboard.myFiles') }}
+            </Button>
 
-            <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
+            <Button variant="ghost" class="justify-start hover:bg-zinc-400/30">
                 <Star class="w-4 h-4 mr-2" />
                 {{ t('dashboard.starred') }}
             </Button>
 
-            <Button variant="ghost" class="justify-start text-black hover:bg-zinc-400/30">
+            <Button variant="ghost" class="justify-start hover:bg-zinc-400/30">
                 <Trash2 class="w-4 h-4 mr-2" />
                 {{ t('dashboard.trash') }}
             </Button>
         </nav>
 
-        <div class="mt-auto text-sm text-black/80">
+        <div class="mt-auto text-sm text-black/80 dark:text-white/50">
             © {{ new Date().getFullYear() }} {{ t('common.siteName') }}
         </div>
     </aside>
 
     <div class="flex-1 flex flex-col w-full">
 
-        <header class="p-4 border-b flex items-center gap-4">
+        <header class="p-4 border-b dark:border-b-neutral-800 flex items-center gap-4">
             <div class="flex-1">
                 <Input v-model="search" :placeholder="t('dashboard.searchFiles')"
-                    class="text-zinc-300 border-zinc-300 bg-white focus-visible:ring-zinc-300" />
+                    class="text-zinc-300 border-zinc-300 bg-white dark:bg-neutral-800 dark:focus-visible:ring-neutral-300 focus-visible:ring-zinc-300" />
             </div>
 
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button variant="outline">{{ t('common.words.new') }} ▼</Button>
+                    <Button class="cursor-pointer" variant="default">{{ t('common.words.new') }}
+                        <ChevronDown />
+                    </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem @click="showUploadFile = true">{{ t('dashboard.uploadFile') }}</DropdownMenuItem>
@@ -43,7 +47,7 @@
             </DropdownMenu>
         </header>
 
-        <main class="flex flex-col w-full gap-4 p-4 overflow-y-scroll">
+        <main class="flex flex-col w-full gap-4 p-4 overflow-y-auto">
             <slot />
         </main>
 
@@ -61,12 +65,14 @@
 
 <script lang="ts" setup>
 import { ref, defineProps, defineEmits, watch } from 'vue';
-import { Upload, Folder, Star, Trash2, File } from "lucide-vue-next";
+import { Upload, Folder, Star, Trash2, File, ChevronDown } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import path from 'path';
 const { t } = useI18n();
+const route = useRoute();
 
 const showUploadFile = ref(false)
 
