@@ -29,11 +29,19 @@ export default defineEventHandler(async (event) => {
     const uuid = crypto.randomUUID();
     const filename = uuid + "." + file.filename; 
 
+    const uploadDir = path.join(process.cwd(), 'public/uploads');
+
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
     const uploadPath = path.join(
         process.cwd(),
         "uploads",
         filename
     );
+
+
 
     const token = formdata.find(item => item.name === "token")?.data.toString();
 

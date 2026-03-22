@@ -95,10 +95,8 @@ docker compose up --build
 
 Change mode in `docker-compose.yml`:
 
-```yaml
-build:
-  context: .
-  target: dev   # dev | init | prod
+# If you need to generate the database
+npx drizzle-kit migrate
 ```
 
 - `dev` → hot reload (`npm run dev`)
