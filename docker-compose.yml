@@ -2,7 +2,7 @@ services:
   dropadox:
     build:
       context: .
-      target: prod   # ← change this only
+      target: prod   # <- change this only
     container_name: dropadox
     restart: always
     ports:
