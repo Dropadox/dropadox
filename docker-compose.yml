@@ -15,9 +15,9 @@ services:
       
 
       #init db if none 
-      #command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
+      command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
      
 
       #id db already exist and has bin initalized
-      command: sh -c "npm install && npm run dev"
+      #command: sh -c "npm install && npm run dev"
       
