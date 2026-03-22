@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-     # - ./:/usr/src/app
+      - ./local.db:/usr/src/app/local.db
       - ./uploads:/usr/src/app/uploads
     working_dir: /usr/src/app
     env_file:
