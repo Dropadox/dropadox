@@ -15,7 +15,18 @@ services:
       
 
       #init db if none 
-      command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
+      command: sh -c ' 
+        npm install &&
+        if [ "$APP_MODE" = "prod" ]; then
+          npm run build && node .output/server/index.mjs;
+        elif [ "$APP_MODE" = "init-dev" ]; then
+          npx drizzle-kit generate &&
+          npx drizzle-kit migrate &&
+          npm run dev;
+        else
+          npm run dev;
+        fi
+      '
      
 
       #id db already exist and has bin initalized

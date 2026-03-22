@@ -1,0 +1,1105 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720
+{\fonttbl{\f0\fmodern Courier New;}}
+\landscape
+\paperw15840\paperh12240
+\margl1152\margr1152\margt1440\margb1440
+\deflang1033\horzdoc
+\pard\plain\f0\fs16
+                   J E S 2  J O B  L O G  --  S Y S T E M  8 5 6 1  --  N O D E  S V S C J E S 2        
+\line\par  
+\par 19.10.28 JOB06268 ---- TUESDAY,   02 DEC 2025 ----
+\par 19.10.28 JOB06268  IRR010I  USERID KC03FB6  IS ASSIGNED TO THIS JOB.
+\par 19.10.28 JOB06268  IEF677I WARNING MESSAGE(S) FOR JOB KC03FB6P ISSUED
+\par 19.10.30 JOB06268  ICH70001I KC03FB6  LAST ACCESS AT 18:55:19 ON TUESDAY, DECEMBER 2, 2025
+\par 19.10.30 JOB06268  $HASP373 KC03FB6P STARTED - INIT 1    - CLASS A        - SYS 8561
+\par 19.10.31 JOB06268  IGD17002I NO ROOM IN VTOC OR VTOC INDEX ON VOLUME KCTR56  417
+\par    417             FOR DATA SET KC03FB6.COMP251.ACCTMAST
+\par 19.10.31 JOB06268  IGD17002I NO ROOM IN VTOC OR VTOC INDEX ON VOLUME KCTR51  418
+\par    418             FOR DATA SET KC03FB6.COMP251.ACCTMAST
+\par 19.10.31 JOB06268  IGD17002I NO ROOM IN VTOC OR VTOC INDEX ON VOLUME KCTR57  419
+\par    419             FOR DATA SET KC03FB6.COMP251.ACCTMAST
+\par 19.10.34 JOB06268  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+\par 19.10.34 JOB06268  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+\par 19.10.34 JOB06268  -STEP010              00     85     28       .00       .00     .0            21  BATCH        0     0     0     0
+\par 19.10.38 JOB06268  -STEP020  COBOL       00  16552    459       .00       .00     .0           182  BATCH        0     0     0     0
+\par 19.10.39 JOB06268  -STEP020  LKED        00    331     60       .00       .00     .0            65  BATCH        0     0     0     0
+\par 19.10.40 JOB06268  -STEP020  GO          00    226     66       .00       .00     .0           131  BATCH        0     0     0     0
+\par 19.10.43 JOB06268  -STEP030              00     68     15       .00       .00     .0            12  BATCH        0     0     0     0
+\par 19.10.43 JOB06268  -KC03FB6P ENDED.  NAME-MATT LAVELLE         TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .2
+\par 19.10.43 JOB06268  $HASP395 KC03FB6P ENDED - RC=0000
+\line\par ------ JES2 JOB STATISTICS ------
+\line\line\par   02 DEC 2025 JOB EXECUTION DATE
+\line\line\par           114 CARDS READ
+\line\line\par         1,109 SYSOUT PRINT RECORDS
+\line\line\par             0 SYSOUT PUNCH RECORDS
+\line\line\par            69 SYSOUT SPOOL KBYTES
+\line\line\par          0.24 MINUTES EXECUTION TIME
+\par         1 //KC03FB6P JOB 1,                                                       JOB06268
+\par           //             'MATT LAVELLE ',    PUT YOUR NAME INSIDE THE QUOTES              
+\par           //             MSGCLASS=H,                                                      
+\par           //             NOTIFY=&SYSUID,TIME=(,10)                                        
+\par           //*                                                                             
+\par           //*                                                                             
+\par           //*                     COMP251 - COBOL                                         
+\par           //*************************************************************                 
+\par           //*         LAB7 VSAM KSDS RANDOM UPDATE                      *                 
+\par           //*   STANDARD COBOL JOB JCL FOR COMP 251 ASSIGNMENTS         *                 
+\par           //*                                                           *                 
+\par           //*   THIS JOB CONTAINS 3 STEPS                               *                 
+\par           //*   STEP010 - DEL & DEF VSAM KSDS (MASTER FILE) AND LOAD DATA                 
+\par           //*   STEP020 - CLG PROGRAM TO UPDATE ACCOUNT MASTER FILE     *                 
+\par           //*             BASED ON DAILY TRANSACTIONS (RANDOM UPDATE)   *                 
+\par           //*   STEP030 - PRINT UPDATED ACCOUNT MASTER FILE             *                 
+\par           //*             AND DELETE ACCOUNT MASTER FILE                *                 
+\par           //*************************************************************                 
+\par           //*--------------------------------------------------------------*              
+\par           //*  STEP010 - DEL & DEF VSAM KSDS (MASTER FILE) AND LOAD DATA                  
+\par           //*--------------------------------------------------------------*              
+\par           IEFC653I SUBSTITUTION JCL - 1,'MATT LAVELLE ',MSGCLASS=H,NOTIFY=KC03FB6,TIME=(,10)
+\par         2 //STEP010  EXEC PGM=IDCAMS                                                      
+\par         3 //SYSPRINT DD  SYSOUT=*                                                         
+\par         4 //SYSIN    DD  *                                                                
+\par           //*  DO NOT CHANGE DATAIN, SYMBOL \{ IS FINE BECAUSE IT'S A SIGN!!!!!            
+\par           //*  RECORD LAYOUT FOR F02-ACCTMAST-FILE:                                       
+\par           //*      W02-MAST-ACCT-NO      PIC X(6).                                        
+\par           //*      W02-MAST-CUST-NO      PIC X(4).                                        
+\par           //*      W02-MAST-ACCT-TYPE    PIC X(3).                                        
+\par           //*      W02-MAST-ACCT-BALANCE PIC S9(6)V99.                                    
+\par           //*      FILLER                PIC X(59).                                       
+\par         5 //DATAIN   DD  *                                                                
+\par           //*                                                                             
+\par           //*--------------------------------------------------------------*              
+\par           //*   STEP020 - COMPILE AND RUN PROGRAM                          *              
+\par           //*--------------------------------------------------------------*              
+\par         6 //STEP020 EXEC IGYWCLG                                                  00120000
+\par         7 XXIGYWCLG PROC LNGPRFX='IGY640',                                        00001000
+\par           XX             LIBPRFX='CEE',GOPGM=GO                                   00002000
+\par           XX*                                                                     00003000
+\par           XX********************************************************************* 00004000
+\par           XX*                                                                   * 00005000
+\par           XX*  IBM Enterprise COBOL for z/OS                                    * 00006000
+\par           XX*               Version 6 Release 3 Modification 0                  * 00007000
+\par           XX*                                                                   * 00008000
+\par           XX*  LICENSED MATERIALS - PROPERTY OF IBM.                            * 00009000
+\par           XX*                                                                   * 00010000
+\par           XX*  5655-EC6 COPYRIGHT IBM CORP. 1983, 2022                          * 00011000
+\par           XX*                                                                   * 00012000
+\par           XX*  US GOVERNMENT USERS RESTRICTED RIGHTS - USE,                     * 00013000
+\par           XX*  DUPLICATION OR DISCLOSURE RESTRICTED BY GSA                      * 00014000
+\par           XX*  ADP SCHEDULE CONTRACT WITH IBM CORP.                             * 00015000
+\par           XX*                                                                   * 00016000
+\par           XX********************************************************************* 00017000
+\par           XX*                                                                     00018000
+\par           XX*  COMPILE, LINK EDIT AND RUN A COBOL PROGRAM                         00019000
+\par           XX*                                                                     00020000
+\par           XX*  PARAMETER  DEFAULT VALUE    USAGE                                  00021000
+\par           XX*   LNGPRFX   IGY640           PREFIX FOR LANGUAGE DATA SET NAMES     00022000
+\par           XX*   LIBPRFX   CEE              PREFIX FOR LIBRARY DATA SET NAMES      00023000
+\par           XX*   GOPGM     GO               MEMBER NAME FOR LOAD MODULE            00024000
+\par           XX*                                                                     00025000
+\par           XX*  CALLER MUST SUPPLY //COBOL.SYSIN DD ...                            00026000
+\par           XX*                                                                     00027000
+\par           XX*  CALLER MUST ALSO SUPPLY //COBOL.SYSLIB DD ... for COPY statements  00028000
+\par           XX*                                                                     00029000
+\par           XX*  NOTE:  SYSUT* datasets must be single-volume datasets              00030000
+\par           XX*                                                                     00031000
+\par         8 XXCOBOL  EXEC PGM=IGYCRCTL,REGION=0M                                    00032000
+\par         9 XXSTEPLIB  DD  DSNAME=&LNGPRFX..SIGYCOMP,DISP=SHR                       00033000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=IGY640.SIGYCOMP,DISP=SHR
+\par        10 XX         DD  DSNAME=&LIBPRFX..SCEERUN,DISP=SHR                        00034000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=CEE.SCEERUN,DISP=SHR
+\par        11 XX         DD  DSNAME=&LIBPRFX..SCEERUN2,DISP=SHR                       00035000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=CEE.SCEERUN2,DISP=SHR
+\par        12 XXSYSPRINT DD  SYSOUT=*                                                 00036000
+\par        13 XXSYSLIN   DD  DSNAME=&&LOADSET,UNIT=SYSALLDA,                          00037000
+\par           XX             DISP=(MOD,PASS),SPACE=(CYL,(1,1)),VOL=(,,,1)             00038000
+\par        14 XXSYSUT1   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00039000
+\par        15 XXSYSUT2   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00040000
+\par        16 XXSYSUT3   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00041000
+\par        17 XXSYSUT4   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00042000
+\par        18 XXSYSUT5   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00043000
+\par        19 XXSYSUT6   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00044000
+\par        20 XXSYSUT7   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00045000
+\par        21 XXSYSUT8   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00046000
+\par        22 XXSYSUT9   DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00047000
+\par        23 XXSYSUT10  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00048000
+\par        24 XXSYSUT11  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00049000
+\par        25 XXSYSUT12  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00050000
+\par        26 XXSYSUT13  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00051000
+\par        27 XXSYSUT14  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00052000
+\par        28 XXSYSUT15  DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00053000
+\par        29 XXSYSMDECK DD  UNIT=SYSALLDA,SPACE=(CYL,(1,1)),VOL=(,,,1)               00054000
+\par        30 //COBOL.SYSIN DD DSN=&SYSUID..COMP251.COBOL(ASST2),DISP=SHR             00130012
+\par           IEFC653I SUBSTITUTION JCL - DSN=KC03FB6.COMP251.COBOL(ASST2),DISP=SHR
+\par        31 //COBOL.SYSLIB DD DSN=KC02134.SLC.CPA.COPYLIB,DISP=SHR                  00131011
+\par        32 XXLKED   EXEC PGM=IEWBLINK,COND=(8,LT,COBOL),REGION=0M                  00055000
+\par        33 XXSYSLIB   DD  DSNAME=&LIBPRFX..SCEELKEX,DISP=SHR                       00056000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=CEE.SCEELKEX,DISP=SHR
+\par        34 XX         DD  DSNAME=&LIBPRFX..SCEELKED,DISP=SHR                       00057000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=CEE.SCEELKED,DISP=SHR
+\par        35 XXSYSPRINT DD  SYSOUT=*                                                 00058000
+\par        36 XXSYSLIN   DD  DSNAME=&&LOADSET,DISP=(OLD,DELETE)                       00059000
+\par        37 XX         DD  DDNAME=SYSIN                                             00060000
+\par        38 XXSYSLMOD  DD  DSNAME=&&GOSET(&GOPGM),SPACE=(CYL,(1,1,1)),              00061000
+\par           XX             UNIT=SYSALLDA,DISP=(MOD,PASS),DSNTYPE=LIBRARY            00062000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=&&GOSET(GO),SPACE=(CYL,(1,1,1)),UNIT=SYSALLDA,DISP=(MOD,PASS),
+\par           DSNTYPE=LIBRARY
+\par        39 XXGO     EXEC PGM=*.LKED.SYSLMOD,COND=((8,LT,COBOL),(4,LT,LKED)),       00063000
+\par           XX             REGION=0M                                                00064000
+\par        40 XXSTEPLIB  DD  DSNAME=&LIBPRFX..SCEERUN,DISP=SHR                        00065000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=CEE.SCEERUN,DISP=SHR
+\par        41 XX         DD  DSNAME=&LIBPRFX..SCEERUN2,DISP=SHR                       00066000
+\par           IEFC653I SUBSTITUTION JCL - DSNAME=CEE.SCEERUN2,DISP=SHR
+\par        42 XXSYSPRINT DD  SYSOUT=*                                                 00067000
+\par        43 //GO.CEEDUMP  DD SYSOUT=*,OUTLIM=4000     PREVENT LARGE DUMPS           00133000
+\par           X/CEEDUMP  DD  SYSOUT=*                                                 00068000
+\par        44 //GO.SYSUDUMP DD SYSOUT=*,OUTLIM=2000     PREVENT LARGE DUMPS           00135000
+\par           X/SYSUDUMP DD  SYSOUT=*                                                 00069000
+\par           //*****           COBOL AND OS USES THESE FILES                         00132000
+\par           //*                                                                     00134000
+\par        45 //GO.SYSOUT   DD SYSOUT=*,OUTLIM=2000     USED BY DISPLAY COMMAND       00136000
+\par           //*****           PROGRAM SELECT STATEMENT FILES                        00137000
+\par           //*  RECORD LAYOUT FOR F01-TRAN-FILE:                                           
+\par           //*      W01-TRAN-ACCT-NO   PIC X(6).                                   00137000
+\par           //*      W01-TRAN-ACTION-CD PIC X(3).  VALUE ADD,UPD OR DEL             00137000
+\par           //*      W01-TRAN-TYPE      PIC X(1).  VALUE W OR D                     00137000
+\par           //*      W01-TRAN-AMOUNT    PIC S9(6)V99.                               00137000
+\par           //*      W01-TRAN-CUST-NO   PIC X(4).                                   00137000
+\par           //*      W01-TRAN-ACCT-TYPE PIC X(3).                                   00137000
+\par           //*      FILLER             PIC X(55).                                  00137000
+\par        46 //GO.F01TRAN  DD *                                                      00138010
+\par        47 //GO.F02ACCT  DD DSN=KC03FB6.COMP251.ACCTMAST,DISP=SHR                  00138010
+\par        48 //GO.F03REPT  DD SYSOUT=*                                               00138010
+\par           //*                                                                             
+\par           //*--------------------------------------------------------------*              
+\par           //*  STEP030 - DUMP UPDATED ACCOUNT MASTER FILE                  *              
+\par           //*             AND DELETE ACCOUNT MASTER FILE                   *              
+\par           //*--------------------------------------------------------------*              
+\par        49 //STEP030  EXEC PGM=IDCAMS                                                      
+\par        50 //SYSPRINT DD  SYSOUT=*                                                         
+\par        51 //SYSIN    DD  *                                                                
+\par        52 //OUTPUT  DD  SYSOUT=*                                                          
+\par           //*                                                                             
+\par  STMT NO. MESSAGE
+\par         6 IEFC001I PROCEDURE IGYWCLG WAS EXPANDED USING SYSTEM LIBRARY SVTSC.PROCLIB
+\par        39 IEF686I DDNAME REFERRED TO ON DDNAME KEYWORD IN PRIOR STEP WAS NOT RESOLVED 
+\par ICH70001I KC03FB6  LAST ACCESS AT 18:55:19 ON TUESDAY, DECEMBER 2, 2025
+\par IEFA111I KC03FB6P IS USING THE FOLLOWING JOB RELATED SETTINGS:
+\par          SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+\par IEF236I ALLOC. FOR KC03FB6P STEP010
+\par IEF237I JES2 ALLOCATED TO SYSPRINT
+\par IEF237I JES2 ALLOCATED TO SYSIN
+\par IEF237I JES2 ALLOCATED TO DATAIN
+\par IGD103I SMS ALLOCATED TO DDNAME SYS00001
+\par IGD104I KC03FB6.COMP251.ACCTMAST                     RETAINED,  DDNAME=SYS00001
+\par IGD103I SMS ALLOCATED TO DDNAME SYS00002
+\par IGD104I KC03FB6.COMP251.ACCTMAST                     RETAINED,  DDNAME=SYS00002
+\par IEF142I KC03FB6P STEP010 - STEP WAS EXECUTED - COND CODE 0000
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000105.?         SYSOUT        
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000101.?         SYSIN         
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000102.?         SYSIN         
+\par IEF373I STEP/STEP010 /START 2025336.1910
+\par IEF032I STEP/STEP010 /STOP  2025336.1910 
+\par         CPU:     0 HR  00 MIN  00.02 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+\par         VIRT:   400K  SYS:   300K  EXT:      356K  SYS:    11688K
+\par         ATB- REAL:                  1296K  SLOTS:                     0K
+\par              VIRT- ALLOC:      18M SHRD:       0M
+\par IEF236I ALLOC. FOR KC03FB6P COBOL STEP020
+\par IEF237I 196E ALLOCATED TO STEPLIB
+\par IEF237I 1001 ALLOCATED TO 
+\par IEF237I 1001 ALLOCATED TO 
+\par IEF237I JES2 ALLOCATED TO SYSPRINT
+\par IGD100I 03DE ALLOCATED TO DDNAME SYSLIN   DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT1   DATACLAS (        )
+\par IGD100I 0D2F ALLOCATED TO DDNAME SYSUT2   DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT3   DATACLAS (        )
+\par IGD100I 03DE ALLOCATED TO DDNAME SYSUT4   DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT5   DATACLAS (        )
+\par IGD100I 03DE ALLOCATED TO DDNAME SYSUT6   DATACLAS (        )
+\par IGD100I 0D2F ALLOCATED TO DDNAME SYSUT7   DATACLAS (        )
+\par IGD100I 0D2F ALLOCATED TO DDNAME SYSUT8   DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT9   DATACLAS (        )
+\par IGD100I 0D2F ALLOCATED TO DDNAME SYSUT10  DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT11  DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT12  DATACLAS (        )
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSUT13  DATACLAS (        )
+\par IGD100I 0D2F ALLOCATED TO DDNAME SYSUT14  DATACLAS (        )
+\par IGD100I 0D2F ALLOCATED TO DDNAME SYSUT15  DATACLAS (        )
+\par IGD100I 03DE ALLOCATED TO DDNAME SYSMDECK DATACLAS (        )
+\par IGD103I SMS ALLOCATED TO DDNAME SYSIN
+\par IGD103I SMS ALLOCATED TO DDNAME SYSLIB
+\par IEF142I KC03FB6P COBOL STEP020 - STEP WAS EXECUTED - COND CODE 0000
+\par IEF285I   IGY640.SIGYCOMP                              KEPT          
+\par IEF285I   VOL SER NOS= VTIGYM.                            
+\par IEF285I   CEE.SCEERUN                                  KEPT          
+\par IEF285I   VOL SER NOS= VTMVSC.                            
+\par IEF285I   CEE.SCEERUN2                                 KEPT          
+\par IEF285I   VOL SER NOS= VTMVSC.                            
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000106.?         SYSOUT        
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.LOADSET.H01  PASSED        
+\par IEF285I   VOL SER NOS= VPMVSH.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116228     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116229     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSE.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116230     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116231     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSH.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116232     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116233     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSH.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116234     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSE.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116235     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSE.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116236     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116237     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSE.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116238     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116239     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116240     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116241     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSE.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116242     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSE.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.R0116243     DELETED       
+\par IEF285I   VOL SER NOS= VPMVSH.                            
+\par IGD104I KC03FB6.COMP251.COBOL                        RETAINED,  DDNAME=SYSIN   
+\par IGD104I KC02134.SLC.CPA.COPYLIB                      RETAINED,  DDNAME=SYSLIB  
+\par IEF373I STEP/COBOL   /START 2025336.1910
+\par IEF032I STEP/COBOL   /STOP  2025336.1910 
+\par         CPU:     0 HR  00 MIN  00.05 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+\par         VIRT:   496K  SYS:   308K  EXT:   177164K  SYS:    14876K
+\par         ATB- REAL:                  8600K  SLOTS:                     0K
+\par              VIRT- ALLOC:     536M SHRD:       0M
+\par IEF236I ALLOC. FOR KC03FB6P LKED STEP020
+\par IEF237I 1001 ALLOCATED TO SYSLIB
+\par IEF237I 1001 ALLOCATED TO 
+\par IEF237I JES2 ALLOCATED TO SYSPRINT
+\par IEF237I 03DE ALLOCATED TO SYSLIN
+\par IEF237I DMY  ALLOCATED TO 
+\par IGD100I 0CE8 ALLOCATED TO DDNAME SYSLMOD  DATACLAS (        )
+\par IEF142I KC03FB6P LKED STEP020 - STEP WAS EXECUTED - COND CODE 0000
+\par IEF285I   CEE.SCEELKEX                                 KEPT          
+\par IEF285I   VOL SER NOS= VTMVSC.                            
+\par IEF285I   CEE.SCEELKED                                 KEPT          
+\par IEF285I   VOL SER NOS= VTMVSC.                            
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000107.?         SYSOUT        
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.LOADSET.H01  DELETED       
+\par IEF285I   VOL SER NOS= VPMVSH.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.GOSET.H01    PASSED        
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF373I STEP/LKED    /START 2025336.1910
+\par IEF032I STEP/LKED    /STOP  2025336.1910 
+\par         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+\par         VIRT:    92K  SYS:   308K  EXT:     1768K  SYS:    11984K
+\par         ATB- REAL:                  1284K  SLOTS:                     0K
+\par              VIRT- ALLOC:      18M SHRD:       0M
+\par IEF236I ALLOC. FOR KC03FB6P GO STEP020
+\par IEF237I 0CE8 ALLOCATED TO PGM=*.DD
+\par IEF237I 1001 ALLOCATED TO STEPLIB
+\par IEF237I 1001 ALLOCATED TO 
+\par IEF237I JES2 ALLOCATED TO SYSPRINT
+\par IEF237I JES2 ALLOCATED TO CEEDUMP
+\par IEF237I JES2 ALLOCATED TO SYSUDUMP
+\par IEF237I JES2 ALLOCATED TO SYSOUT
+\par IEF237I JES2 ALLOCATED TO F01TRAN
+\par IGD103I SMS ALLOCATED TO DDNAME F02ACCT
+\par IEF237I JES2 ALLOCATED TO F03REPT
+\par IEF142I KC03FB6P GO STEP020 - STEP WAS EXECUTED - COND CODE 0000
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.GOSET.H01    KEPT          
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   CEE.SCEERUN                                  KEPT          
+\par IEF285I   VOL SER NOS= VTMVSC.                            
+\par IEF285I   CEE.SCEERUN2                                 KEPT          
+\par IEF285I   VOL SER NOS= VTMVSC.                            
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000108.?         SYSOUT        
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000109.?         SYSOUT        
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000110.?         SYSOUT        
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000111.?         SYSOUT        
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000103.?         SYSIN         
+\par IGD104I KC03FB6.COMP251.ACCTMAST                     RETAINED,  DDNAME=F02ACCT 
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000112.?         SYSOUT        
+\par IEF373I STEP/GO      /START 2025336.1910
+\par IEF032I STEP/GO      /STOP  2025336.1910 
+\par         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+\par         VIRT:   112K  SYS:   296K  EXT:     5676K  SYS:    12012K
+\par         ATB- REAL:                  1308K  SLOTS:                     0K
+\par              VIRT- ALLOC:      20M SHRD:       0M
+\par IEF236I ALLOC. FOR KC03FB6P STEP030
+\par IEF237I JES2 ALLOCATED TO SYSPRINT
+\par IEF237I JES2 ALLOCATED TO SYSIN
+\par IEF237I JES2 ALLOCATED TO OUTPUT
+\par IGD103I SMS ALLOCATED TO DDNAME SYS00003
+\par IGD104I KC03FB6.COMP251.ACCTMAST                     RETAINED,  DDNAME=SYS00003
+\par IGD103I SMS ALLOCATED TO DDNAME SYS00004
+\par IGD104I KC03FB6.COMP251.ACCTMAST                     RETAINED,  DDNAME=SYS00004
+\par IEF142I KC03FB6P STEP030 - STEP WAS EXECUTED - COND CODE 0000
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000113.?         SYSOUT        
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000104.?         SYSIN         
+\par IEF285I   KC03FB6.KC03FB6P.JOB06268.D0000114.?         SYSOUT        
+\par IEF373I STEP/STEP030 /START 2025336.1910
+\par IEF032I STEP/STEP030 /STOP  2025336.1910 
+\par         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+\par         VIRT:   264K  SYS:   300K  EXT:      172K  SYS:    11988K
+\par         ATB- REAL:                  1308K  SLOTS:                     0K
+\par              VIRT- ALLOC:      20M SHRD:       0M
+\par IEF237I 0CE8 ALLOCATED TO SYS00005
+\par IEF285I   SYS25336.T191043.RA000.KC03FB6P.R0116246     KEPT          
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF285I   SYS25336.T191028.RA000.KC03FB6P.GOSET.H01    DELETED       
+\par IEF285I   VOL SER NOS= VPMVSC.                            
+\par IEF375I  JOB/KC03FB6P/START 2025336.1910
+\par IEF033I  JOB/KC03FB6P/STOP  2025336.1910 
+\par         CPU:     0 HR  00 MIN  00.10 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+\page IDCAMS  SYSTEM SERVICES                                           TIME: 19:10:30        12/02/25     PAGE      1
+\line\par         
+\par   DELETE KC03FB6.COMP251.ACCTMAST PURGE ERASE
+\line\par IDC0550I ENTRY (D) KC03FB6.COMP251.ACCTMAST.DATA DELETED
+\line\par IDC0550I ENTRY (I) KC03FB6.COMP251.ACCTMAST.INDX DELETED
+\line\par IDC0550I ENTRY (C) KC03FB6.COMP251.ACCTMAST DELETED
+\line\par IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0
+\line\par         
+\par         
+\par   IF LASTCC = 8 THEN
+\par         
+\par       SET MAXCC = 0
+\par         
+\par        DEFINE CLUSTER -
+\par            (NAME(KC03FB6.COMP251.ACCTMAST) -
+\par             VOLUME(*) -
+\par             INDEXED -
+\par             SHAREOPTIONS(2 3) -
+\par             RECORDS(100 50)) -
+\par        DATA -
+\par             (NAME(KC03FB6.COMP251.ACCTMAST.DATA) -
+\par             KEYS(6 0) -
+\par             RECORDSIZE(80 80) -
+\par             FREESPACE(20 10) -
+\par             BUFFERSPACE(8000))   -
+\par        INDEX -
+\par             (NAME(KC03FB6.COMP251.ACCTMAST.INDX) -
+\par             IMBED)
+\line\par IDC0508I DATA ALLOCATION STATUS FOR VOLUME KCTR01 IS 0
+\line\par IDC0509I INDEX ALLOCATION STATUS FOR VOLUME KCTR01 IS 0
+\par IDC0181I STORAGECLASS USED IS PRIM90
+\line\par IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0
+\line\par         
+\par         
+\par    REPRO -
+\par       INFILE(DATAIN) -
+\par       OUTDATASET(KC03FB6.COMP251.ACCTMAST) -
+\par       ERRORLIMIT(6)
+\line\par IDC0005I NUMBER OF RECORDS PROCESSED WAS 6
+\line\par IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0
+\page IDCAMS  SYSTEM SERVICES                                           TIME: 19:10:30        12/02/25     PAGE      2
+\line\par         
+\par         
+\line\par IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417                 Date 12/02/2025  Time 19:10:35   Page     1                
+\line\par PROCESS(CBL) statements:                                                                                                            
+\par  CBL NOXREF,SSRANGE,NOSEQ                                                                                                           
+\line\par Options in effect:                                                                                                                  
+\par  NOADATA                                                                                                                            
+\par    ADV                                                                                                                              
+\par    AFP(NOVOLATILE)                                                                                                                  
+\par    QUOTE                                                                                                                            
+\par    ARCH(10)                                                                                                                         
+\par    ARITH(COMPAT)                                                                                                                    
+\par  NOAWO                                                                                                                              
+\par  NOBLOCK0                                                                                                                           
+\par    BUFSIZE(4096)                                                                                                                    
+\par  NOCICS                                                                                                                             
+\par    CODEPAGE(1140)                                                                                                                   
+\par  NOCOMPILE(S)                                                                                                                       
+\par    CONDCOMP(NOSKIPSRC)                                                                                                              
+\par  NOCOPYLOC                                                                                                                          
+\par  NOCOPYRIGHT                                                                                                                        
+\par  NOCURRENCY                                                                                                                         
+\par    DATA(31)                                                                                                                         
+\par    DBCS                                                                                                                             
+\par  NODECK                                                                                                                             
+\par  NODEFINE                                                                                                                           
+\par  NODIAGTRUNC                                                                                                                        
+\par    DISPSIGN(COMPAT)                                                                                                                 
+\par  NODLL                                                                                                                              
+\par  NODUMP                                                                                                                             
+\par  NODYNAM                                                                                                                            
+\par  NOEXIT                                                                                                                             
+\par  NOEXPORTALL                                                                                                                        
+\par  NOFASTSRT                                                                                                                          
+\par    FLAG(I,I)                                                                                                                        
+\par  NOFLAGSTD                                                                                                                          
+\par    HGPR(PRESERVE)                                                                                                                   
+\par  NOINITCHECK                                                                                                                        
+\par  NOINITIAL                                                                                                                          
+\par    INLINE                                                                                                                           
+\par    INTDATE(ANSI)                                                                                                                    
+\par  NOINVDATA                                                                                                                          
+\par  NOJAVAIOP                                                                                                                          
+\par    LANGUAGE(EN)                                                                                                                     
+\par    LINECOUNT(60)                                                                                                                    
+\par  NOLIST                                                                                                                             
+\par    LP(32)                                                                                                                           
+\par  NOLSACHECK                                                                                                                         
+\par  NOMAP                                                                                                                              
+\par    MAXPCF(100000)                                                                                                                   
+\par  NOMDECK                                                                                                                            
+\par  NONAME                                                                                                                             
+\par    NSYMBOL(NATIONAL)                                                                                                                
+\par  NONUMBER                                                                                                                           
+\par  NONUMCHECK                                                                                                                         
+\par    NUMPROC(NOPFD)                                                                                                                   
+\par    OBJECT                                                                                                                           
+\par  NOOFFSET                                                                                                                           
+\par    OPTIMIZE(0)                                                                                                                      
+\par    OUTDD(SYSOUT)                                                                                                                    
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417                 Date 12/02/2025  Time 19:10:35   Page     2                
+\line\par  NOPARMCHECK                                                                                                                        
+\par    PGMNAME(COMPAT)                                                                                                                  
+\par    QUALIFY(COMPAT)                                                                                                                  
+\par    RENT                                                                                                                             
+\par    RMODE(AUTO)                                                                                                                      
+\par  NORULES                                                                                                                            
+\par  NOSERVICE                                                                                                                          
+\par  NOSEQUENCE                                                                                                                         
+\par    SMARTBIN                                                                                                                         
+\par    SOURCE(DEC)                                                                                                                      
+\par    SPACE(1)                                                                                                                         
+\par  NOSQL                                                                                                                              
+\par    SQLCCSID                                                                                                                         
+\par  NOSQLIMS                                                                                                                           
+\par    SSRANGE(NOZLEN,ABD)                                                                                                              
+\par  NOSTGOPT                                                                                                                           
+\par    SUPPRESS                                                                                                                         
+\par  NOTERM                                                                                                                             
+\par  NOTEST(NODWARF,NOSOURCE,NOSEPARATE)                                                                                                
+\par  NOTHREAD                                                                                                                           
+\par    TRUNC(STD)                                                                                                                       
+\par    TUNE(10)                                                                                                                         
+\par  NOVBREF                                                                                                                            
+\par    VLR(STANDARD)                                                                                                                    
+\par    VSAMOPENFS(COMPAT)                                                                                                               
+\par  NOWORD                                                                                                                             
+\par    XMLPARSE(XMLSS)                                                                                                                  
+\par  NOXREF                                                                                                                             
+\par    ZWB                                                                                                                              
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     3                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000001                IDENTIFICATION DIVISION.                                                                                    
+\par   000002                PROGRAM-ID. ASST2.                                                                                          
+\par   000003               ******************************** *******************                                                         
+\par   000004               **   PROGRAM COMMENT BLOCK                                                                                   
+\par   000005               **   PROGRAM PURPOSE: ASSIGNMENT# 2                                                                          
+\par   000006               **                    VSAM ACCOUNT MASTER FILE MAINTENANCE                                                   
+\par   000007               **                    USING RANDOM PROCESSING                                                                
+\par   000008               **   PROGRAMMER NAME: MATTHEW LAVELLE                                                                        
+\par   000009               **   DATE           : 02 DEC W49 2025                                                                        
+\par   000010               ****************************************************                                                         
+\par   000011                ENVIRONMENT DIVISION.                                                                                       
+\par   000012                CONFIGURATION SECTION.                                                                                      
+\par   000013                SOURCE-COMPUTER. IBM-390 WITH DEBUGGING MODE.                                                               
+\par   000014               *SOURCE-COMPUTER. IBM-390.                                                                                   
+\par   000015                INPUT-OUTPUT SECTION.                                                                                       
+\par   000016                FILE-CONTROL.                                                                                               
+\par   000017                    SELECT F01-TRAN-FILE                                                                                    
+\par   000018                        ASSIGN TO F01TRAN                                                                                   
+\par   000019                        ORGANIZATION IS SEQUENTIAL                                                                          
+\par   000020                        ACCESS MODE  IS SEQUENTIAL.                                                                         
+\par   000021                                                                                                                            
+\par   000022                    SELECT F02-ACCTMAST-FILE                                                                                
+\par   000023                        ASSIGN TO F02ACCT                                                                                   
+\par   000024                        ORGANIZATION IS INDEXED                                                                             
+\par   000025                        ACCESS IS RANDOM                                                                                    
+\par   000026                        RECORD KEY IS F02-MAST-ACCT-NO.                                                                     
+\par   000027                                                                                                                            
+\par   000028                    SELECT F03-REPT-FILE                                                                                    
+\par   000029                        ASSIGN TO F03REPT                                                                                   
+\par   000030                        ORGANIZATION IS SEQUENTIAL                                                                          
+\par   000031                        ACCESS MODE IS SEQUENTIAL.                                                                          
+\par   000032                                                                                                                            
+\par   000033                DATA DIVISION.                                                                                              
+\par   000034                FILE SECTION.                                                                                               
+\par   000035                FD  F01-TRAN-FILE                                                                                           
+\par   000036                    RECORDING MODE IS F.                                                                                    
+\par   000037                01  F01-TRAN-RECORD.                                                                                        
+\par   000038                    05        PIC X(80).                                                                                    
+\par   000039                                                                                                                            
+\par   000040                FD  F02-ACCTMAST-FILE.                                                                                      
+\par   000041                01  F02-ACCTMAST-RECORD.                                                                                    
+\par   000042                    05 F02-MAST-ACCT-NO    PIC X(6).                                                                        
+\par   000043                    05                     PIC X(74).                                                                       
+\par   000044                                                                                                                            
+\par   000045                FD  F03-REPT-FILE                                                                                           
+\par   000046                    RECORDING MODE IS F.                                                                                    
+\par   000047                01  F03-REPT-RECORD.                                                                                        
+\par   000048                    05        PIC X(120).                                                                                   
+\par   000049                WORKING-STORAGE SECTION.                                                                                    
+\par   000050                                                                                                                            
+\par   000051                01  W01-EOF-SW                PIC X VALUE SPACE.                                                            
+\par   000052                    88  W01-AT-EOF            VALUE 'Y'.                                                                    
+\par   000053                01  W01-REC-FOUND-SW          PIC X VALUE SPACE.                                                            
+\par   000054                    88  W01-REC-NOTFND        VALUE 'Y'.                                                                    
+\par   000055                01  W01-REC-ALREADY-EXIST-SW  PIC X VALUE SPACE.                                                            
+\par   000056                    88  W01-REC-ALREADY-EXIST VALUE 'Y'.                                                                    
+\par   000057                                                                                                                            
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     4                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000058                01  W01-TRAN-RECORD.                                                                                        
+\par   000059                    05  W01-TRAN-ACCT-NO   PIC X(6).                                                                        
+\par   000060                    05  W01-TRAN-ACTION-CD PIC X(3).                                                                        
+\par   000061                        88 W01-ADD         VALUE 'ADD'.                                                                     
+\par   000062                        88 W01-UPDATE      VALUE 'UPD'.                                                                     
+\par   000063                        88 W01-DELETE      VALUE 'DEL'.                                                                     
+\par   000064                    05  W01-TRAN-TYPE      PIC X(1).                                                                        
+\par   000065                        88 W01-WITHDRAWAL  VALUE 'W'.                                                                       
+\par   000066                        88 W01-DEPOSIT     VALUE 'D'.                                                                       
+\par   000067                    05  W01-TRAN-AMOUNT    PIC S9(6)V99.                                                                    
+\par   000068                    05  W01-TRAN-CUST-NO   PIC X(4).                                                                        
+\par   000069                    05  W01-TRAN-ACCT-TYPE PIC X(3).                                                                        
+\par   000070                    05  FILLER             PIC X(55).                                                                       
+\par   000071                                                                                                                            
+\par   000072                01  W02-ACCTMAST-RECORD.                                                                                    
+\par   000073                    05  W02-MAST-ACCT-NO      PIC X(6).                                                                     
+\par   000074                    05  W02-MAST-CUST-NO      PIC X(4).                                                                     
+\par   000075                    05  W02-MAST-ACCT-TYPE    PIC X(3).                                                                     
+\par   000076                    05  W02-MAST-ACCT-BALANCE PIC S9(6)V99.                                                                 
+\par   000077                    05  FILLER                PIC X(59).                                                                    
+\par   000078                                                                                                                            
+\par   000079               *                                                                                                            
+\par   000080               ***** PRINT LINES                                                                                            
+\par   000081               *                                                                                                            
+\par   000082                01  W05-HEAD1 PIC X(60) VALUE                                                                               
+\par   000083                    '         CUSTOMER ACCOUNT MAINTENACE'.                                                                 
+\par   000084                01  W05-HEAD2.                                                                                              
+\par   000085                    05   PIC X(45) VALUE                                                                                    
+\par   000086                    '         USING RANDOM ACCESS           DATE: '.                                                        
+\par   000087                    05  W05-HEAD2-DATE  PIC 9999/99/99.                                                                     
+\par   000088                    05  PIC X(4) VALUE SPACES.                                                                              
+\par   000089                01  W05-HEAD3.                                                                                              
+\par   000090                    05  PIC X(07) VALUE                                                                                     
+\par   000091                        ' AC NO.'.                                                                                          
+\par   000092                    05  PIC X(06) VALUE                                                                                     
+\par   000093                        ' AC CD'.                                                                                           
+\par   000094                    05  PIC X(06) VALUE                                                                                     
+\par   000095                        ' CUST#'.                                                                                           
+\par   000096                    05  PIC X(06) VALUE                                                                                     
+\par   000097                        ' AC TY'.                                                                                           
+\par   000098                    05  PIC X(15) VALUE                                                                                     
+\par   000099                        '    TRAN AMT'.                                                                                     
+\par   000100                    05  PIC X(11) VALUE                                                                                     
+\par   000101                        ' AC BALANCE'.                                                                                      
+\par   000102                    05  PIC X(20) VALUE                                                                                     
+\par   000103                        '  MESSAGE'.                                                                                        
+\par   000104                01  W06-REPT-LINE.                                                                                          
+\par   000105                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000106                    05  W06-ACCT-NO       PIC X(6).                                                                         
+\par   000107                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000108                    05  W06-ACTION-CD     PIC X(3).                                                                         
+\par   000109                    05                    PIC X(4)  VALUE SPACES.                                                           
+\par   000110                    05  W06-CUST-NO       PIC X(4).                                                                         
+\par   000111                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000112                    05  W06-ACCT-TYPE     PIC X(3).                                                                         
+\par   000113                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000114                    05  W06-TRAN-AMOUNT   PIC ZZZ,ZZ9.99-.                                                                  
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     5                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000115                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000116                    05  W06-TRAN-TYPE     PIC X(1).                                                                         
+\par   000117                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000118                    05  W06-ACCT-BALANCE  PIC ZZZ,ZZZ.ZZ-.                                                                  
+\par   000119                    05                    PIC X(1)  VALUE SPACES.                                                           
+\par   000120                    05  W06-MSG           PIC X(40).                                                                        
+\par   000121                                                                                                                            
+\par   000122                PROCEDURE DIVISION.                                                                                         
+\par   000123                    DISPLAY 'COMP251 ASST2, STUDENT NAME = MATT LAVELLE      '                                              
+\par   000124                    DISPLAY FUNCTION CURRENT-DATE                                                                           
+\par   000125                                                                                                                            
+\par   000126                    PERFORM A100-INIT                                                                                       
+\par   000127                    PERFORM A200-PROCESS UNTIL W01-AT-EOF                                                                   
+\par   000128                    PERFORM A300-FINAL                                                                                      
+\par   000129               D    DISPLAY 'MAIN STOPPING'                                                                                 
+\par   000130                    STOP RUN                                                                                                
+\par   000131                    .                                                                                                       
+\par   000132                                                                                                                            
+\par   000133                A100-INIT.                                                                                                  
+\par   000134               D    DISPLAY 'A100-INIT RUNNING'                                                                             
+\par   000135               ***  WRITE IO MODE FOR EACH FILE                                                                             
+\par   000136                    OPEN INPUT F01-TRAN-FILE                                                                                
+\par   000137                    OPEN I-O   F02-ACCTMAST-FILE                                                                            
+\par   000138                    OPEN OUTPUT F03-REPT-FILE                                                                               
+\par   000139                    MOVE 'N' TO W01-EOF-SW                                                                                  
+\par   000140                                W01-REC-FOUND-SW                                                                            
+\par   000141                                                                                                                            
+\par   000142                                                                                                                            
+\par   000143                                                                                                                            
+\par   000144                                                                                                                            
+\par   000145                                                                                                                            
+\par   000146                                                                                                                            
+\par   000147               ***       PRINT REPORT HEADING                                                                               
+\par   000148                    WRITE F03-REPT-RECORD FROM W05-HEAD1                                                                    
+\par   000149                        AFTER ADVANCING PAGE                                                                                
+\par   000150                    MOVE FUNCTION CURRENT-DATE (1:8) TO                                                                     
+\par   000151                         W05-HEAD2-DATE                                                                                     
+\par   000152                    WRITE F03-REPT-RECORD FROM W05-HEAD2                                                                    
+\par   000153                        AFTER ADVANCING 1 LINE                                                                              
+\par   000154                    WRITE F03-REPT-RECORD FROM W05-HEAD3                                                                    
+\par   000155                        AFTER ADVANCING 2 LINE                                                                              
+\par   000156                    MOVE SPACES TO F03-REPT-RECORD                                                                          
+\par   000157                    WRITE F03-REPT-RECORD                                                                                   
+\par   000158                        AFTER ADVANCING 1 LINE                                                                              
+\par   000159                                                                                                                            
+\par   000160                    PERFORM C100-READ-TRAN                                                                                  
+\par   000161                    .                                                                                                       
+\par   000162                                                                                                                            
+\par   000163                A200-PROCESS.                                                                                               
+\par   000164               ******************************************                                                                   
+\par   000165               *                                                                                                            
+\par   000166               *   FUNCTION OF THIS PARAGRAPH                                                                               
+\par   000167               *  1. PROCESS EACH INPUT TRANSACTION DEPENDING ON ACTION CODE                                                
+\par   000168               *  2. PRINT A LINE ON REPORT FOR THE TRANSACTION ACTIVITY                                                    
+\par   000169               *  3. READ THE NEXT TRANSACTION FOR PROCESSING                                                               
+\par   000170               *                                                                                                            
+\par   000171               ******************************************                                                                   
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     6                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000172               D    DISPLAY 'A200-PROCESS RUNNING'                                                                          
+\par   000173                    DISPLAY "INPUT RECORD="   W01-TRAN-RECORD                                                               
+\par   000174                                                                                                                            
+\par   000175                    EVALUATE TRUE                                                                                           
+\par   000176                       WHEN W01-ADD                                                                                         
+\par   000177      1                     PERFORM B100-ADD-ACCOUNT                                                                        
+\par   000178                       WHEN W01-UPDATE                                                                                      
+\par   000179      1                     PERFORM B200-UPDATE-ACCOUNT                                                                     
+\par   000180                       WHEN W01-DELETE                                                                                      
+\par   000181      1                     PERFORM B300-DELETE-ACCOUNT                                                                     
+\par   000182                       WHEN OTHER                                                                                           
+\par   000183      1                     CONTINUE                                                                                        
+\par   000184                    END-EVALUATE                                                                                            
+\par   000185                    PERFORM D100-PRINT-LINE                                                                                 
+\par   000186                    PERFORM C100-READ-TRAN                                                                                  
+\par   000187                    .                                                                                                       
+\par   000188                                                                                                                            
+\par   000189                A300-FINAL.                                                                                                 
+\par   000190               ******************************************                                                                   
+\par   000191               *                                                                                                            
+\par   000192               *   CLOSE UP THE PROGRAM                                                                                     
+\par   000193               *                                                                                                            
+\par   000194               ******************************************                                                                   
+\par   000195               D    DISPLAY 'A300-FINAL RUNNING'                                                                            
+\par   000196                    CLOSE F01-TRAN-FILE                                                                                     
+\par   000197                          F02-ACCTMAST-FILE                                                                                 
+\par   000198                          F03-REPT-FILE                                                                                     
+\par   000199                    .                                                                                                       
+\par   000200                                                                                                                            
+\par   000201                B100-ADD-ACCOUNT.                                                                                           
+\par   000202                                                                                                                            
+\par   000203                    IF NOT W01-DEPOSIT                                                                                      
+\par   000204      1                MOVE 'INVALID TRAN TYPE FOR ACCT ADD'                                                                
+\par   000205      1                      TO W06-MSG                                                                                     
+\par   000206      1                EXIT PARAGRAPH                                                                                       
+\par   000207                    END-IF                                                                                                  
+\par   000208                                                                                                                            
+\par   000209                    PERFORM C200-READ-MASTER                                                                                
+\par   000210                                                                                                                            
+\par   000211                    IF NOT W01-REC-NOTFND                                                                                   
+\par   000212      1                MOVE 'ACCT ALREADY EXISTS' TO W06-MSG                                                                
+\par   000213      1                EXIT PARAGRAPH                                                                                       
+\par   000214                    END-IF                                                                                                  
+\par   000215                    MOVE W01-TRAN-ACCT-NO      TO W02-MAST-ACCT-NO                                                          
+\par   000216                     MOVE W01-TRAN-CUST-NO      TO W02-MAST-CUST-NO                                                         
+\par   000217                    MOVE W01-TRAN-ACCT-TYPE    TO W02-MAST-ACCT-TYPE                                                        
+\par   000218                    MOVE W01-TRAN-AMOUNT       TO W02-MAST-ACCT-BALANCE                                                     
+\par   000219                    PERFORM C300-WRITE-MASTER                                                                               
+\par   000220                    MOVE 'ACCOUNT ADDED' TO W06-MSG                                                                         
+\par   000221                                                                                                                            
+\par   000222               D    DISPLAY 'B100-ADD-ACCOUNT'                                                                              
+\par   000223                    .                                                                                                       
+\par   000224                B200-UPDATE-ACCOUNT.                                                                                        
+\par   000225                                                                                                                            
+\par   000226               D    DISPLAY 'B200-UPDATE-ACCOUNT'                                                                           
+\par   000227                                                                                                                            
+\par   000228                    PERFORM C200-READ-MASTER                                                                                
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     7                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000229                      IF W01-REC-NOTFND                                                                                     
+\par   000230      1                  MOVE 'AC NUMBER NOT FOUND' TO W06-MSG                                                              
+\par   000231      1                  MOVE ZEROS       TO W02-MAST-ACCT-BALANCE                                                          
+\par   000232      1                      MOVE SPACES      TO W02-MAST-CUST-NO                                                           
+\par   000233      1                                          W02-MAST-ACCT-TYPE                                                         
+\par   000234                                                                                                                            
+\par   000235      1                  EXIT PARAGRAPH                                                                                     
+\par   000236                      END-IF                                                                                                
+\par   000237                                                                                                                            
+\par   000238                    IF W01-DEPOSIT                                                                                          
+\par   000239      1                ADD W01-TRAN-AMOUNT TO W02-MAST-ACCT-BALANCE                                                         
+\par   000240                    ELSE                                                                                                    
+\par   000241      1               SUBTRACT W01-TRAN-AMOUNT FROM W02-MAST-ACCT-BALANCE                                                   
+\par   000242                    END-IF                                                                                                  
+\par   000243                    PERFORM C500-REWRITE-MASTER                                                                             
+\par   000244                    MOVE 'BALANCE UPDATED' TO W06-MSG                                                                       
+\par   000245                    .                                                                                                       
+\par   000246                                                                                                                            
+\par   000247                B300-DELETE-ACCOUNT.                                                                                        
+\par   000248               ******************************************                                                                   
+\par   000249               *                                                                                                            
+\par   000250               *  1. VALIDATE ACCT NUMBER EXISTS IN MASTER FILE                                                             
+\par   000251               *  2. REJECT DEL IF ACCT NUMBER DOES NOT EXIST IN MASTER FILE,                                               
+\par   000252               *      SET W06-MSG TO 'AC NUMBER NOT FOUND'                                                                  
+\par   000253               *  3. REJECT DEL IF W02-MAST-ACCT-BALANCE >= ZERO,                                                           
+\par   000254               *      SET W06-MSG TO 'CAN ONLY DELETE ACCT WITH -VE BALANCE'                                                
+\par   000255               *  4. DELETE MASTER RECORD,                                                                                  
+\par   000256               *      SET W06-MSG TO 'ACCT DELETED' FOR SUCCESSFUL DELETE                                                   
+\par   000257               *                                                                                                            
+\par   000258               ******************************************                                                                   
+\par   000259               D    DISPLAY 'B300-DELETE-ACCOUNT'                                                                           
+\par   000260                                                                                                                            
+\par   000261                    PERFORM C200-READ-MASTER                                                                                
+\par   000262                                                                                                                            
+\par   000263                    IF W01-REC-NOTFND                                                                                       
+\par   000264      1                 MOVE 'AC NUMBER NOT FOUND' TO W06-MSG                                                               
+\par   000265      1                 EXIT PARAGRAPH                                                                                      
+\par   000266                    END-IF                                                                                                  
+\par   000267                    IF W02-MAST-ACCT-BALANCE >= 0                                                                           
+\par   000268      1                MOVE 'CAN ONLY DELETE ACCT WITH -VE BALANCE'                                                         
+\par   000269      1                      TO W06-MSG                                                                                     
+\par   000270      1               EXIT PARAGRAPH                                                                                        
+\par   000271                    END-IF                                                                                                  
+\par   000272                    PERFORM C600-DELETE-MASTER                                                                              
+\par   000273                    MOVE 'ACCT DELETED' TO W06-MSG                                                                          
+\par   000274                    .                                                                                                       
+\par   000275                C100-READ-TRAN.                                                                                             
+\par   000276               ******************************************                                                                   
+\par   000277               *                                                                                                            
+\par   000278               *   READ ONE RECORD FROM INPUT TRANSACTION FILE.                                                             
+\par   000279               *   NO NEED TO CHANGE.                                                                                       
+\par   000280               *                                                                                                            
+\par   000281               ******************************************                                                                   
+\par   000282               D    DISPLAY 'C100-READ-TRAN'                                                                                
+\par   000283                    READ F01-TRAN-FILE INTO W01-TRAN-RECORD                                                                 
+\par   000284      1                AT END SET W01-AT-EOF TO TRUE                                                                        
+\par   000285                    END-READ                                                                                                
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     8                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000286                    .                                                                                                       
+\par   000287                                                                                                                            
+\par   000288                C200-READ-MASTER.                                                                                           
+\par   000289               ******************************************                                                                   
+\par   000290               *                                                                                                            
+\par   000291               *   USE ACCT NUMBER ON TRANSACTION RECORD TO READ MASTER FILE                                                
+\par   000292               *                                                                                                            
+\par   000293               ******************************************                                                                   
+\par   000294               D    DISPLAY 'C200-READ-MASTER'                                                                              
+\par   000295                     MOVE 'N' TO W01-REC-FOUND-SW                                                                           
+\par   000296                     MOVE W01-TRAN-ACCT-NO TO F02-MAST-ACCT-NO                                                              
+\par   000297                     READ F02-ACCTMAST-FILE                                                                                 
+\par   000298                        KEY IS F02-MAST-ACCT-NO                                                                             
+\par   000299                        INVALID KEY                                                                                         
+\par   000300      1                    SET W01-REC-NOTFND TO TRUE                                                                       
+\par   000301                                                                                                                            
+\par   000302                     END-READ.                                                                                              
+\par   000303                                                                                                                            
+\par   000304                C300-WRITE-MASTER.                                                                                          
+\par   000305               ******************************************                                                                   
+\par   000306               *                                                                                                            
+\par   000307               *   ADD MASTER RECORD                                                                                        
+\par   000308               *                                                                                                            
+\par   000309               ******************************************                                                                   
+\par   000310               D    DISPLAY 'C300-WRITE-MASTER'                                                                             
+\par   000311                     WRITE F02-ACCTMAST-RECORD                                                                              
+\par   000312                      INVALID KEY                                                                                           
+\par   000313      1                SET W01-REC-ALREADY-EXIST TO TRUE                                                                    
+\par   000314      1              .                                                                                                      
+\par   000315                                                                                                                            
+\par   000316                C500-REWRITE-MASTER.                                                                                        
+\par   000317               ******************************************                                                                   
+\par   000318               *                                                                                                            
+\par   000319               *   UPDATE MASTER RECORD                                                                                     
+\par   000320               *                                                                                                            
+\par   000321               ******************************************                                                                   
+\par   000322               D    DISPLAY 'C500-REWRITE-MASTER'                                                                           
+\par   000323                    REWRITE F02-ACCTMAST-RECORD                                                                             
+\par   000324                       INVALID KEY                                                                                          
+\par   000325      1                   SET W01-REC-NOTFND TO TRUE                                                                        
+\par   000326                                                                                                                            
+\par   000327      1             .                                                                                                       
+\par   000328                C600-DELETE-MASTER.                                                                                         
+\par   000329               ******************************************                                                                   
+\par   000330               *                                                                                                            
+\par   000331               *   DELETE MASTER RECORD                                                                                     
+\par   000332               *                                                                                                            
+\par   000333               ******************************************                                                                   
+\par   000334               D    DISPLAY 'C600-DELETE-MASTER'                                                                            
+\par   000335                                                                                                                            
+\par   000336                    DELETE F02-ACCTMAST-FILE                                                                                
+\par   000337                       INVALID KEY                                                                                          
+\par   000338      1                   SET W01-REC-NOTFND TO TRUE                                                                        
+\par   000339      1             .                                                                                                       
+\par   000340                                                                                                                            
+\par   000341                D100-PRINT-LINE.                                                                                            
+\par   000342               ******************************************                                                                   
+\page PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P250417       ASST2     Date 12/02/2025  Time 19:10:35   Page     9                
+\par   LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference           
+\line\par   000343               *                                                                                                            
+\par   000344               *   PRINT DETAIL RECORD TO REPORT. NO NEED TO CHANGE                                                         
+\par   000345               *                                                                                                            
+\par   000346               ******************************************                                                                   
+\par   000347               D    DISPLAY 'C100-PRINT-LINE'                                                                               
+\par   000348                    MOVE W01-TRAN-ACCT-NO      TO W06-ACCT-NO                                                               
+\par   000349                    MOVE W01-TRAN-ACTION-CD    TO W06-ACTION-CD                                                             
+\par   000350                    MOVE W01-TRAN-AMOUNT       TO W06-TRAN-AMOUNT                                                           
+\par   000351                    MOVE W01-TRAN-TYPE         TO W06-TRAN-TYPE                                                             
+\par   000352                    IF W01-ADD                                                                                              
+\par   000353      1                MOVE W01-TRAN-CUST-NO   TO W06-CUST-NO                                                               
+\par   000354      1                MOVE W01-TRAN-ACCT-TYPE TO W06-ACCT-TYPE                                                             
+\par   000355                    ELSE                                                                                                    
+\par   000356      1                MOVE W02-MAST-CUST-NO   TO W06-CUST-NO                                                               
+\par   000357      1                MOVE W02-MAST-ACCT-TYPE TO W06-ACCT-TYPE                                                             
+\par   000358                    END-IF                                                                                                  
+\par   000359                    MOVE W02-MAST-ACCT-BALANCE TO W06-ACCT-BALANCE                                                          
+\par   000360                    WRITE F03-REPT-RECORD    FROM W06-REPT-LINE                                                             
+\par   000361                    .                                                                                                       
+\line\line\par * Statistics for COBOL program ASST2:                                                                                               
+\par *    Source records = 361                                                                                                           
+\par *    Data Division statements = 40                                                                                                  
+\par *    Procedure Division statements = 95                                                                                             
+\par *    Generated COBOL statements = 0                                                                                                 
+\par *    Program complexity factor = 96                                                                                                 
+\line\par End of compilation 1,  program ASST2,  no statements flagged.                                                                       
+\line\par Return code 0                                                                                                                       
+\page z/OS V3 R1 BINDER     19:10:37 TUESDAY DECEMBER  2, 2025                                                                
+\par BATCH EMULATOR  JOB(KC03FB6P) STEP(STEP020 ) PGM= IEWBLINK  PROCEDURE(LKED    )                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                 *** O P E R A T I O N   S U M M A R Y   R E P O R T ***                                 
+\par                                                                                                                         
+\page PROCESSING OPTIONS:                                                                                                     
+\par                                                                                                                         
+\par    ALIASES             NO                                                                                               
+\par    ALIGN2              NO                                                                                               
+\par    AMODE               UNSPECIFIED                                                                                      
+\par    CALL                YES                                                                                              
+\par    CASE                UPPER                                                                                            
+\par    COMPAT              UNSPECIFIED                                                                                      
+\par    COMPRESS            AUTO                                                                                             
+\par    DCBS                NO                                                                                               
+\par    DYNAM               NO                                                                                               
+\par    EXTATTR             UNSPECIFIED                                                                                      
+\par    EXITS:              NONE                                                                                             
+\par    FILL                NONE                                                                                             
+\par    GID                 UNSPECIFIED                                                                                      
+\par    HOBSET              NO                                                                                               
+\par    INFO                NO                                                                                               
+\par    LET                 04                                                                                               
+\par    LINECT              060                                                                                              
+\par    LIST                SUMMARY                                                                                          
+\par    LISTPRIV            NO                                                                                               
+\par    LONGPARM            NO                                                                                               
+\par    MAP                 NO                                                                                               
+\par    MAXBLK              032760                                                                                           
+\par    MODMAP              NO                                                                                               
+\par    MSGLEVEL            00                                                                                               
+\par    OVLY                NO                                                                                               
+\par    PRINT               YES                                                                                              
+\par    RES                 NO                                                                                               
+\par    REUSABILITY         UNSPECIFIED                                                                                      
+\par    RMODE               UNSPECIFIED                                                                                      
+\par    RMODEX              NO                                                                                               
+\par    SIGN                NO                                                                                               
+\par    STORENX             NOREPLACE                                                                                        
+\par    STRIPCL             NO                                                                                               
+\par    STRIPSEC            NO                                                                                               
+\par    SYMTRACE                                                                                                             
+\par    TERM                NO                                                                                               
+\par    TRAP                ON                                                                                               
+\par    UID                 UNSPECIFIED                                                                                      
+\par    UPCASE              NO                                                                                               
+\par    WKSPACE             000000K,000000K                                                                                  
+\par    XCAL                NO                                                                                               
+\par    XREF                NO                                                                                               
+\par    ***END OF OPTIONS***                                                                                                 
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\page SAVE OPERATION SUMMARY:                                                                                                 
+\par                                                                                                                         
+\par    MEMBER NAME         GO                                                                                               
+\par    LOAD LIBRARY        SYS25336.T191028.RA000.KC03FB6P.GOSET.H01                                                        
+\par    PROGRAM TYPE        PROGRAM OBJECT(FORMAT 3)                                                                         
+\par    VOLUME SERIAL       VPMVSC                                                                                           
+\par    DISPOSITION         ADDED NEW                                                                                        
+\par    TIME OF SAVE        19.10.38  DEC  2, 2025                                                                           
+\par                                                                                                                         
+\par                                                                                                                         
+\page SAVE MODULE ATTRIBUTES:                                                                                                 
+\par                                                                                                                         
+\par    AC                  000                                                                                              
+\par    AMODE                31                                                                                              
+\par    COMPRESSION         NONE                                                                                             
+\par    DC                  NO                                                                                               
+\par    EDITABLE            YES                                                                                              
+\par    EXCEEDS 16MB        NO                                                                                               
+\par    EXECUTABLE          YES                                                                                              
+\par    LONGPARM            NO                                                                                               
+\par    MIGRATABLE          NO                                                                                               
+\par    OL                  NO                                                                                               
+\par    OVLY                NO                                                                                               
+\par    PACK,PRIME          NO,NO                                                                                            
+\par    PAGE ALIGN          NO                                                                                               
+\par    REFR                NO                                                                                               
+\par    RENT                NO                                                                                               
+\par    REUS                NO                                                                                               
+\par    RMODE               ANY                                                                                              
+\par    SCTR                NO                                                                                               
+\par    SIGN                NO                                                                                               
+\par    SSI                                                                                                                  
+\par    SYM GENERATED       NO                                                                                               
+\par    TEST                NO                                                                                               
+\par    XPLINK              NO                                                                                               
+\par    MODULE SIZE (HEX)   000032C8                                                                                         
+\par    DASD SIZE (HEX)     00013000                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\page  ENTRY POINT AND ALIAS SUMMARY:                                                                                         
+\par                                                                                                                         
+\par  NAME:            ENTRY TYPE AMODE C_OFFSET CLASS NAME        STATUS                                                    
+\par                                                                                                                         
+\par  ASST2             MAIN_EP      31 00000000 C_CODE                                                                      
+\par                                                                                                                         
+\par                          *** E N D   O F   O P E R A T I O N   S U M M A R Y   R E P O R T ***                          
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\page z/OS V3 R1 BINDER     19:10:37 TUESDAY DECEMBER  2, 2025                                                                
+\par BATCH EMULATOR  JOB(KC03FB6P) STEP(STEP020 ) PGM= IEWBLINK  PROCEDURE(LKED    )                                         
+\par IEW2008I 0F03 PROCESSING COMPLETED.  RETURN CODE =  0.                                                                  
+\par                                                                                                                         
+\par                                                                                                                         
+\par                                                                                                                         
+\page ----------------------                                                                                                  
+\par MESSAGE SUMMARY REPORT                                                                                                  
+\par ----------------------                                                                                                  
+\par  TERMINAL MESSAGES      (SEVERITY = 16)                                                                                 
+\par  NONE                                                                                                                   
+\par                                                                                                                         
+\par  SEVERE MESSAGES        (SEVERITY = 12)                                                                                 
+\par  NONE                                                                                                                   
+\par                                                                                                                         
+\par  ERROR MESSAGES         (SEVERITY = 08)                                                                                 
+\par  NONE                                                                                                                   
+\par                                                                                                                         
+\par  WARNING MESSAGES       (SEVERITY = 04)                                                                                 
+\par  NONE                                                                                                                   
+\par                                                                                                                         
+\par  INFORMATIONAL MESSAGES (SEVERITY = 00)                                                                                 
+\par  2008                                                                                                                   
+\par                                                                                                                         
+\par                                                                                                                         
+\par  **** END OF MESSAGE SUMMARY REPORT ****                                                                                
+\par                                                                                                                         
+\par COMP251 ASST2, STUDENT NAME = MATT LAVELLE                                                                              
+\par 2025120219103926-0500                                                                                                   
+\par A100-INIT RUNNING                                                                                                       
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000012UPDW00004000           * ACCT NOT EXIST FOR UPDATE                                                   
+\par B200-UPDATE-ACCOUNT                                                                                                     
+\par C200-READ-MASTER                                                                                                        
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000004UPDW00004000           * UPDATED                                                                     
+\par B200-UPDATE-ACCOUNT                                                                                                     
+\par C200-READ-MASTER                                                                                                        
+\par C500-REWRITE-MASTER                                                                                                     
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000003UPDD00003000           * UPDATED                                                                     
+\par B200-UPDATE-ACCOUNT                                                                                                     
+\par C200-READ-MASTER                                                                                                        
+\par C500-REWRITE-MASTER                                                                                                     
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000006ADDD000030000002TFS    * ACCT ALREADY EXISTS, CAN'T ADD                                              
+\par C200-READ-MASTER                                                                                                        
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000010ADDW000030000002SAV    * INVALID TRAN TYPE FOR ADD                                                   
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000011ADDD000030000002CHK    * ADDED                                                                       
+\par C200-READ-MASTER                                                                                                        
+\par C300-WRITE-MASTER                                                                                                       
+\par B100-ADD-ACCOUNT                                                                                                        
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000005DEL 00000000           * +VE BAL, CAN'T DELETE                                                       
+\par B300-DELETE-ACCOUNT                                                                                                     
+\par C200-READ-MASTER                                                                                                        
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000012DEL 00000000           * ACCT NOT EXIST FOR DELETE                                                   
+\par B300-DELETE-ACCOUNT                                                                                                     
+\par C200-READ-MASTER                                                                                                        
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A200-PROCESS RUNNING                                                                                                    
+\par INPUT RECORD=000001DEL 00000000           * DELETED                                                                     
+\par B300-DELETE-ACCOUNT                                                                                                     
+\par C200-READ-MASTER                                                                                                        
+\par C100-PRINT-LINE                                                                                                         
+\par C100-READ-TRAN                                                                                                          
+\par A300-FINAL RUNNING                                                                                                      
+\par MAIN STOPPING                                                                                                           
+\page          CUSTOMER ACCOUNT MAINTENACE                                                                                    
+\par          USING RANDOM ACCESS           DATE: 2025/12/02                                                                 
+\line\par  AC NO. AC CD CUST# AC TY    TRAN AMT    AC BALANCE  MESSAGE                                                            
+\par                                                                                                                         
+\par  000012 UPD                  40.00  W             AC NUMBER NOT FOUND                                                   
+\par  000004 UPD                  40.00  W      40.00- BALANCE UPDATED                                                       
+\par  000003 UPD                  30.00  D      10.00- BALANCE UPDATED                                                       
+\par  000006 ADD    0002 TFS      30.00  D      10.00- ACCT ALREADY EXISTS                                                   
+\par  000010 ADD    0002 SAV      30.00  W      10.00- INVALID TRAN TYPE FOR ACCT ADD                                        
+\par  000011 ADD    0002 CHK      30.00  D      30.00  ACCOUNT ADDED                                                         
+\par  000005 DEL    0002 CHK       0.00         30.00  CAN ONLY DELETE ACCT WITH -VE BALANCE                                 
+\par  000012 DEL    0002 CHK       0.00         30.00  AC NUMBER NOT FOUND                                                   
+\par  000001 DEL    0002 CHK       0.00         30.00  CAN ONLY DELETE ACCT WITH -VE BALANCE                                 
+\page IDCAMS  SYSTEM SERVICES                                           TIME: 19:10:40        12/02/25     PAGE      1
+\line\par         
+\par    REPRO -
+\par       OUTFILE(OUTPUT) -
+\par       INDATASET(KC03FB6.COMP251.ACCTMAST)
+\line\par IDC0005I NUMBER OF RECORDS PROCESSED WAS 7
+\line\par IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0
+\line\par         
+\par         
+\par    DELETE KC03FB6.COMP251.ACCTMAST PURGE ERASE
+\line\par IDC0550I ENTRY (D) KC03FB6.COMP251.ACCTMAST.DATA DELETED
+\line\par IDC0550I ENTRY (I) KC03FB6.COMP251.ACCTMAST.INDX DELETED
+\line\par IDC0550I ENTRY (C) KC03FB6.COMP251.ACCTMAST DELETED
+\line\par IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0
+\line\par         
+\line\par IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0
+\par 0000010001SAV0000001\}                                                           
+\par 0000020002SAV0002000\{                                                           
+\par 0000030001CHK0003000\{                                                           
+\par 0000040002CHK0004000\{                                                           
+\par 0000050003CHK0005000\{                                                           
+\par 0000060003SAV0006000\{                                                           
+\par 0000110003SAV0006000\{                                                           
+\par }}

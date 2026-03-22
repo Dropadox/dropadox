@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
 
     const uploadPath = path.join(
         process.cwd(),
-        "public/uploads",
+        "uploads",
         filename
     );
 
