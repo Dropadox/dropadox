@@ -20,7 +20,10 @@
 
 <script setup lang="ts">
 import { Download } from 'lucide-vue-next';
-import { getFileName } from '../../../shared/utils/getFileName';
+const getFileName = (filePath: string) => filePath.split('/').pop() ?? filePath;
+
+
+
 const {t} = useI18n();
 const { fileId } = useRoute().params;
 const token = useCookie("token").value;

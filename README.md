@@ -83,20 +83,35 @@ What started as a hackathon sprint became a long-term open source project with a
 
 ---
 
-## Local Development
+## Local Development - Docker
 
 ```bash
-# Install dependencies
-npm install
+# first time only
+touch local.db
 
-# Run local dev server
-npm run dev
+# run (set target in compose)
+docker compose up --build
+```
+
+Change mode in `docker-compose.yml`:
 
 # If you need to generate the database
 npx drizzle-kit migrate
 ```
+change the docker-compose.yaml target parameter to your desired option: 
+- `dev` → hot reload (`npm run dev`)
+- `init` → runs migrations + dev
+- `prod` → builds and runs production server
 
----
+
+Data persists via:
+
+```yaml
+- ./uploads:/usr/src/app/uploads
+- ./local.db:/usr/src/app/local.db
+```
+
+------
 
 ## License
 

@@ -1,23 +1,15 @@
-services: 
+services:
   dropadox:
-      image: node:22-alpine
-      container_name: dropadox
-      restart: always
-      ports:
-        - "3000:3000"
-      volumes:
-        - ./:/usr/src/app
-      working_dir: /usr/src/app
-      env_file:
-        - ./.env
-      #for prod build 
-      #command: sh -c "npm install && npm run build && node .output/server/index.mjs"
-      
-
-      #init db if none 
-      #command: sh -c "npm install && npx drizzle-kit generate && npx drizzle-kit migrate && npm run dev"
-     
-
-      #id db already exist and has bin initalized
-      command: sh -c "npm install && npm run dev"
-      
+    build:
+      context: .
+      target: prod   # <- change this only
+    container_name: dropadox
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./local.db:/usr/src/app/local.db
+      - ./uploads:/usr/src/app/uploads
+    working_dir: /usr/src/app
+    env_file:
+      - ./.env

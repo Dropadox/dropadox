@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import DashboardSidebar from "@/components/DashboardSidebar.vue"; // make sure to import it
-import { getFileName } from '../../shared/utils/getFileName';
+const getFileName = (filePath: string) => filePath.split('/').pop() ?? filePath;
 
 const {t} = useI18n();
 

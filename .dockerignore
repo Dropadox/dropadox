@@ -1,0 +1,10 @@
+node_modules
+.output
+.nuxt
+.git
+uploads
+*.log
+.env
+.env.*
+dist
+coverage
