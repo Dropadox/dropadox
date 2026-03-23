@@ -98,10 +98,11 @@ Change mode in `docker-compose.yml`:
 # If you need to generate the database
 npx drizzle-kit migrate
 ```
-
+change the docker-compose.yaml target parameter to your desired option: 
 - `dev` → hot reload (`npm run dev`)
 - `init` → runs migrations + dev
 - `prod` → builds and runs production server
+
 
 Data persists via:
 
